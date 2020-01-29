@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itwspace.mapper.SpaceMapper">
+
+<select id="list" resultType="com.itwspace.model.SpaceVO">
+        select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate from space
+</select>
+
+<select id="myList" resultType="com.itwspace.model.SpaceVO">
+		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate 
+		from space where userId = #{userId}
+</select>
+
+<insert id="write" parameterType="com.itwspace.model.SpaceVO">
+	 	insert into space(space_id, userId, space_kind, space_title, space_price, space_address, space_content, space_account)
+		values(#{space_id}, #{userId}, #{space_kind}, #{space_title}, #{space_price}, #{space_address},
+		#{space_content}, #{space_account})
+</insert>
+
+<select id="findById" parameterType="int"  resultType="com.itwspace.model.SpaceVO">
+		select * from space where space_id = #{space_id}
+</select>
+	
+<select id="view" parameterType="int" resultType="com.itwspace.model.SpaceVO">
+		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate from space where space_id=#{space_id}
+</select>
+
+<update id="modify" parameterType="com.itwspace.model.SpaceVO">
+		update space set space_title=#{space_title}, space_kind=#{space_kind}, space_price=#{space_price}, space_address=#{space_address}, space_content=#{space_content}, space_account=#{space_account} where space_id=#{space_id}
+</update>
+
+<delete id="delete" parameterType="int">
+		delete from space where space_id=#{space_id}
+		
+</delete>
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itwspace.mapper.MemberMapper">
+
+<insert id="insert">
+	 insert into tbl_member(userId, userPw, userName, phone, email, auth) 
+	 	values(#{userId}, #{userPw}, #{userName}, #{phone}, #{email}, #{auth})
+</insert>
+
+<select id="findByUserId" resultType="com.itwspace.model.MemberVO">
+	select * from tbl_member where userId = #{userId}
+</select>
+
+<update id="update">
+	update tbl_member set 
+	userName= #{userName},
+	phone= #{phone},
+	email= #{email},
+	auth = #{auth}
+	where userId = #{userId}
+</update>
+
+<delete id="delete">
+	delete from tbl_member where userId = #{userId}
+</delete>
+
+<update id="updatePassword">
+	update tbl_member set 
+	userPw= #{userPw}
+	where userId = #{userId}
+</update>
+
+</mapper>
