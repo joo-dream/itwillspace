@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itwspace.mapper.ReviewMapper">
+
+	<insert id="create">
+		insert into tbl_review (content, userId, space_id)
+		values (#{content}, #{userId}, #{space_id})
+	</insert>
+
+	<select id="findById" resultType="com.itwspace.model.ReviewVO">
+		select * from tbl_review where reviewId =
+		#{reviewId}
+	</select>
+
+	<update id="update">
+		update tbl_review set content = #{content}, regDate = now() 
+		where reviewId = #{reviewId}
+	</update>
+
+	<delete id="delete">
+		delete from tbl_review where reviewId = #{reviewId}
+	</delete>
+	
+	<select id="list" resultType="com.itwspace.model.ReviewVO">
+		select * from tbl_review where space_id = #{space_id} 
+		order by reviewId desc
+	</select>
+
+	<select id="getListWithPaging" resultType="com.itwspace.model.ReviewVO">
+		select * from tbl_review where space_id = #{space_id} 
+		order by reviewId desc
+		limit #{pageNum}, #{amount}
+	</select>
+	<select id="getCount" resultType="int">
+		select count(reviewId) from tbl_review where space_id = #{space_id}
+	</select>
+</mapper>
