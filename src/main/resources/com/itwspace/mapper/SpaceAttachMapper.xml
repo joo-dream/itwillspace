@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwspace.mapper.SpaceAttachMapper">
+
+<insert id="insert">
+		insert into space_profile (uuid, uploadPath, filename, space_id)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{space_id} )
+</insert>
+
+<delete id="delete">
+	delete from space_profile where uuid = #{uuid}	
+</delete>
+
+<select id="findBySpace_id" resultType="com.itwspace.model.SpaceAttachVO">
+	select * from space_profile where space_id = #{space_id}
+</select>
+
+<delete id="deleteAll">
+	delete from space_profile where space_id = #{space_id}
+</delete>
+
+<select id="getOldFiles" resultType="com.itwspace.model.SpaceAttachVO">
+
+	select * from space_profile where uploadPath = to_char(sysdate -1 ,'yyyy\mm\dd')
+
+</select>
+</mapper>
