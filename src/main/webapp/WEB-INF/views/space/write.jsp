@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,13 +106,146 @@ function daumZipCode() {
 			<tr>
 				<th width="50" height="50" class="form-control">공간결제계좌</th>
 				<td><input type="text" name="space_account" value="${view.account }"/></td>
-			
 			</tr>
+			<div class="card shadow mb-4 border border-primary">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6>
+			</div>
+		    	<div class="card-body">
+	          	<div class="card">
+	          	<div class="row no-gutters">
+	              	<div class="col-4">
+	                <img src="/" alt="" class="card-img"/>
+	                <div class="card-img-overlay d-flex align-items-end flex-column justify-content-end">
+		              <div class='uploadResult'> 
+	          				<ul >         
+	          				</ul>
+	        		  </div>	                
+	                </div>
+	              </div>
+	              <div class="col-8">
+	                <div class="card-body">
+	                  <p class="card-text">
+	                   	  <input multiple="multiple" type="file" name='uploadFile' accept="image/*">	                   	  
+	                  </p>
+	                </div>
+	              </div>
+				</div>	
+	          </div>	        
+		     </div>		      		
+		</div>
 			
 		</table>
 		<button type="submit">작성</button>	
 		
 	</form>
 </div>
+	<script>
+
+$(document).ready(function(e){
+
+	var regex = new RegExp("\\.(bmp|gif|jpg|jpeg|png)$","i");
+	var maxSize = 5242880; //5MB
+	//업로드 가능한 파일인지 확인
+	function checkExtension(fileName, fileSize){
+	  if(regex.test(fileName)==false){
+	    alert("해당 종류의 파일은 업로드할 수 없습니다.");
+	    return false;
+	  }	
+	  if(fileSize >= maxSize){
+	    alert("파일 사이즈 초과");
+	    return false;
+	  }	
+	  return true;
+	}
+
+	//업로드 된 사진 화면에 보여주기
+	function showUploadResult(uploadResultArr){		   
+	   if(!uploadResultArr || uploadResultArr.length == 0)
+		   { return; }
+
+	   var uploadImg = $(".card-img");
+	   var uploadUL = $(".uploadResult ul");
+	   var str ="";
+
+	   $(".uploadResult ul li").each(function(i, obj){
+		   var jobj = $(obj);
+		   jobj.remove();
+	   });
+	   $(uploadResultArr).each(function(i, obj){			    		   		
+		    var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+		    console.log(fileCallPath);
+		    uploadImg.attr('src', "/display?fileName=" + fileCallPath);
+		    
+			str += "<li data-path='"+obj.uploadPath+"'";
+			str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+			str +" ><div>";
+			str += "<span> "+ obj.fileName+"</span>";
+			str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+			str += "data-type='image' class='btn btn-secondary btn-circle btn-sm'><i class='fas fa-times'></i></button><br>";
+			str += "</div>";
+			str +"</li>";			    	
+	   });
+	   uploadUL.append(str);
+	 }
+
+	//파일 선택후 이미지 파일 저장 	
+	$("input[type='file']").change(function(e){
+		
+		  var formData = new FormData();
+		  
+		  var inputFile = $("input[name='uploadFile']");
+		  
+		  var files = inputFile[0].files;
+		  for(var i = 0; i < files.length; i++){
+		
+		    if(!checkExtension(files[i].name, files[i].size) ){	
+		      console.log(files);  
+		      return false;
+		    }
+		    formData.append("uploadFile", files[i]);
+		   
+		  }
+		  console.log(files);
+		  $.ajax({
+		    url: '/uploadAjaxAction',
+		    processData: false, 
+		    contentType: false,
+		    data: formData,
+		    type: 'POST',
+		    dataType:'json',
+		    success: function(result){
+		        console.log(result); 
+				showUploadResult(result); //업로드 결과 처리 함수 	
+		    }
+		  }); //$.ajax  
+		});
+
+	//첨부된 이미지 파일 삭제
+	$(".uploadResult").on("click", "button", function(e){
+		   
+		   console.log("delete file");
+
+		   var uploadImg = $(".card-img");  
+		   var targetFile = $(this).data("file");
+		   var type = $(this).data("type");
+		   
+		   var targetLi = $(this).closest("li");
+		   
+		   $.ajax({
+		     url: '/deleteFile',
+		     data: {fileName: targetFile, type:type},
+		     dataType:'text',
+		     type: 'POST',  
+		       success: function(result){
+		          alert("프로파일 설정이 삭제되었습니다.");
+		          
+		          targetLi.remove();
+		          uploadImg.attr('src', "/resources/image/default.png");
+		        }
+		   }); //$.ajax
+		  });
+});	 
+</script>
 </body>
 </html>
