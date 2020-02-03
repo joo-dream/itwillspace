@@ -16,4 +16,6 @@ public class SpaceVO {
 	private String space_content;
 	private String space_account;
 	private Date space_regDate;
+	
+	private List<SpaceAttachVO> attachList;
 }
