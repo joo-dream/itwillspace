@@ -27,4 +27,12 @@ public interface SpaceMapper {
 	
 	public List<SpaceVO> myList(String userId);
 	
+	public void deleteAll(String space_id);
+
+	public int delete(String space_id);
+
+	public List<SpaceAttachVO> findBySpace_id(String space_id);
+	
+	public List<SpaceVO> hostPage(@Param("startPost") int startPost, @Param("countList")int countList);
+	
 }
