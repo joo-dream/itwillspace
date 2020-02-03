@@ -23,6 +23,7 @@ $(document).ready(function(){
 
 <div class="container">
 	<h2>공간 목록</h2>
+	<a href="${path}/space/listPage?page=1">페이지처리</a>
 	<hr>
 	<input id="myInput" type="text" placeholder="검색..">
 	<br><br>
