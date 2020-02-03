@@ -36,6 +36,23 @@
 		delete from space where space_id=#{space_id}
 		
 </delete>
+	
+	<select id="count" resultType="int">
+		select count(space_id) from space
+</select>
+
+<select id="listPage" resultType="com.itwspace.model.SpaceVO">
+		select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate
+		from space
+		order by space_id desc
+		limit #{startPost}, #{countList}
+</select>
+
+<select id="hostPage" resultType="com.itwspace.model.SpaceVO">
+		select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate
+		from space
+		order by space_id desc
+		limit #{startPost}, #{countList}
 
 
 </mapper>
