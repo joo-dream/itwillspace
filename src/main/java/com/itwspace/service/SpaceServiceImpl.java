@@ -77,5 +77,25 @@ public class SpaceServiceImpl implements SpaceService {
 		return mapper.listPage(startPost, countList);
 	}
 
+	@Override
+	public List<SpaceAttachVO> getAttachList(String space_id) {
+		log.info("get Attach list by space_id" + space_id);
+
+		return mapper.findBySpace_id(space_id);
+	}
+
+	@Transactional
+	@Override
+	public boolean remove(String space_id) {
+		log.info("remove...." + space_id);
+
+		mapper.deleteAll(space_id);
+		return mapper.delete(space_id) == 1;
+	}
+
+	@Override
+	public List<SpaceVO> hostPage(int startPost, int countList) throws Exception {
+		return mapper.hostPage(startPost, countList);
+	}
 
 }
