@@ -16,6 +16,9 @@
 	<div class="container">
 		<h2>공간 내용</h2>
 		<hr>
+		<img src="/resources/image/test2.jpg" id = "spaceImg" class="m-3" style="width:200px;height:250px ">
+		<br>
+    		<h3 class = " ml-4 media-title"> ${space.space_image}</h3>
 		<table style="line-height: 25px;">
 			<tr>
 				<th width="50">제 목</th>
