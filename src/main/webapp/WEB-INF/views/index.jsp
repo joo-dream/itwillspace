@@ -62,6 +62,7 @@
 					<div class="col-8 col-md-8 col-lg-4">
 						<h1 class="mb-0">
 							<a href="index.html" class="text-white h2 mb-0"><strong>ITW SPACE<span
+							<a href="/" class="text-white h2 mb-0"><strong>ITW SPACE<span
 									class="text-primary">.</span></strong></a>
 						</h1>
 					</div>
@@ -76,6 +77,7 @@
 
 							<ul class="site-menu js-clone-nav d-none d-lg-block">
 								<li class="active"><a href="index.html">Home</a></li>
+								<li class="active"><a href="/">Home</a></li>
 								<li class="has-children"><a href="/space/list">space
 										List</a>
 									<ul class="dropdown arrow-top">
@@ -86,7 +88,7 @@
 											href="/space/detail?space_id=1">방 상세정보보기</a>
 											<ul class="dropdown">
 												<li><a href="/space/write">space 등록</a></li>
-												<li><a href="#">Menu Two</a></li>
+												<li><a href="/space/room_detail_all">상세방정보 예시</a></li>
 												<li><a href="#">Menu Three</a></li>
 											</ul></li>
 									</ul></li>
@@ -99,10 +101,16 @@
 								  <a href="/member/login">로그인</a>
 								</sec:authorize>
 								<sec:authorize access="isAuthenticated()">
-								   	<form role="form" action="/logout" method="POST">
-								    	<!-- <button class="m-0 p-0 btn btn-link" type="submit">로그아웃</button>-->
-								    	<a href="/logout" id="logout">로그아웃</a>
-								    </form>  
+									
+									   	<form action="/logout" method="POST">
+									   	
+									    	<button class="navBtn" type="submit"
+									    	style="background-color: rgba(255, 255, 255, 0); border:0px;
+									    	padding: 10px 10px; text-decoration: none !important; color: rgba(255, 255, 255, 0.6);"
+									    	>
+									    	로그아웃</button>
+									    </form>  
+								    
 								</sec:authorize>
 								</li>
 								
@@ -115,7 +123,6 @@
 			</div>
 	</div>
 	<!-- end of NAVBAR -->
-
 	<div class="site-mobile-menu">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close mt-3">
@@ -134,24 +141,7 @@
 				<div class="col-md-8 text-center" data-aos="fade-up"
 					data-aos-delay="400">
 
-					<!-- 일단 이름 
-					<div class="section full-height">
-						<div class="absolute-center">
-							<div class="section">
-								<div class="container">
-									<div class="row">
-										<div class="col-12 mb-4">
-											<h1>
-												<span>아</span><span>이</span><span>티</span><span>윌</span><span>룸</span><span>스</span><span>페</span><span>이</span><span>스</span>
-												<span>!</span><br> <span>m</span><span>a</span><span>i</span><span>n</span>
-											</h1>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					-->
+					
 
 					<h1 class="mb-4">Excellent Space For Your Time~~!!</h1>
 					<p class="mb-5">Choose Your Space! Party!! Semina!! fjrigje</p>
