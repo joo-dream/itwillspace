@@ -20,6 +20,7 @@
 		<security:intercept-url pattern="/" access="permitAll" />
 		<security:intercept-url pattern="/member/register" access="permitAll" />
 		<security:intercept-url pattern="/space/list" access="permitAll" />	
+		<security:intercept-url pattern="/space/listPage" access="permitAll" />	
 		<security:intercept-url pattern="/space/detail" access="permitAll" />		
 		<security:intercept-url pattern="/space/write" access="hasRole('ROLE_HOST')" />	
 		<security:intercept-url pattern="/memberInfo/hostPage" access="hasRole('ROLE_HOST')" />	

@@ -68,7 +68,7 @@ public class SpaceServiceImpl implements SpaceService {
 
 	@Override
 	public int count() throws Exception{
-		log.info("count....." + count());
+		log.info("count.....");
 		return mapper.count();
 	}
 

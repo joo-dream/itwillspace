@@ -61,7 +61,7 @@
 				<div class="row align-items-center">
 					<div class="col-8 col-md-8 col-lg-4">
 						<h1 class="mb-0">
-							<a href="index.html" class="text-white h2 mb-0"><strong>ITW SPACE<span
+							<!-- <a href="index.html" class="text-white h2 mb-0"><strong>ITW SPACE<span -->
 							<a href="/" class="text-white h2 mb-0"><strong>ITW SPACE<span
 									class="text-primary">.</span></strong></a>
 						</h1>
@@ -78,7 +78,7 @@
 							<ul class="site-menu js-clone-nav d-none d-lg-block">
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="active"><a href="/">Home</a></li>
-								<li class="has-children"><a href="/space/list">space
+								<li class="has-children"><a href="/space/listPage?page=1">space
 										List</a>
 									<ul class="dropdown arrow-top">
 										<li><a href="#">Party Room</a></li>
@@ -412,7 +412,7 @@
 
 				<!-- space List로 이동 버튼  -->
 				<div class="col-md-12 text-center mt-5" data-aos="fade-up">
-					<a href="/space/list" class="btn btn-primary">Show More...</a>
+					<a href="/space/listPage?page=1" class="btn btn-primary">Show More...</a>
 				</div>
 
 			</div>

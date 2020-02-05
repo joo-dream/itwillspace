@@ -14,6 +14,17 @@
 		from space where userId = #{userId}
 </select>
 
+<select id="listPage" resultType="com.itwspace.model.SpaceVO">
+		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
+		from space 
+		order by space_id desc
+		limit #{startPost}, #{countList}
+</select>
+
+<select id="count" resultType="int">
+      select count(space_id) from space
+</select>
+
 <insert id="write" parameterType="com.itwspace.model.SpaceVO">
 	 	insert into space(space_id, userId, space_kind, space_title, space_price, space_address, space_content, space_account)
 		values(#{space_id}, #{userId}, #{space_kind}, #{space_title}, #{space_price}, #{space_address},

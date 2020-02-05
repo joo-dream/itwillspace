@@ -2,6 +2,7 @@ package com.itwspace.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
 import com.itwspace.model.SpaceVO;
 
@@ -19,7 +20,7 @@ public interface SpaceMapper {
 
 	public int count();
 
-	public List<SpaceVO> listPage(int startPost, int countList);
+	public List<SpaceVO> listPage(@Param("startPost") int startPost, @Param("countList") int countList);
 
 	public void write(SpaceVO vo);
 
