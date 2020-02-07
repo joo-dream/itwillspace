@@ -6,14 +6,47 @@
 <html lang="en">
 
 <head>
+
+<link rel="stylesheet"
+   href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/magnific-popup.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/bootstrap-datepicker.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/mediaelementplayer.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/animate.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/fl-bigmug-line.css">
+
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/aos.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/style.css">
+   
 	<%@include file="../includes/header.jsp"%>  
 </head> 
 
-<body>
+<body style="margin:150px auto;">
 
-<div class="container-fluid">
-	<h1 class="h2 mb-2 text-gray-800">Host Page</h1>
-		
+<div class="container-fluid" style="width:75%; margin-bottom:5%;">
+
+	<h1 class="h2 text-gray-800">Host Page</h1>
+    <br>
 	<div class="media border p-3">
   		<img src="/resources/image/default.png" id = "profileImg" class="m-3 rounded-circle" style="width:250px;height:250px ">
   		<div class="media-body ml-5">
@@ -80,41 +113,29 @@
 
 <div class="container">
 	
-	<h2>등록된 공간 목록</h2>
-	<hr>
+	<h2>내가 등록한 공간 보기</h2><br>
+	<hr><br>
 	<input id="myInput" type="text" placeholder="검색..">
 	<br><br>
-	<table id="myTable" class="table table-bordered table-striped table-hover">
-		<thead>
-			<tr class="info">
-				<th width="60">번   호</th>
-				<th width="140">제   목</th>
-				<th width="100">방타입</th>
-				<th width="150">방가격</th>
-				<th width="250">방주소</th>
-				<th width="150">계   좌</th>
-				<th width="150">작성일</th>
-				
-			</tr>
-		</thead>
-		<tbody>
-		<c:forEach items="${myList}" var="myList">
-			<tr class="trs">
-				<td>${myList.space_id}</td>
-				<td><a href="/space/view?id=${myList.space_id}">${myList.space_title}</a></td>
-				<td>${myList.space_kind}</td>
-				<td>${myList.space_price}</td>
-				<td>${myList.space_address}</td>
-				<!-- 
-				<td>${list.space_content}</td>
-				 -->
-				<td>${myList.space_account}</td>
-				<td>${myList.space_regDate}</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
-</div>
+   
+	<%-- 카드형식 테스트 --%>
+	<div class="row">
+		<c:forEach items="${myList}" var="myList" begin="0" end="8">
+			<div class="col-lg-4" data-aos="fade-up"
+             data-aos-delay="100" >
+            <a href="/space/view?id=${myList.space_id}"  style="border-radius:5px; margin-bottom:10%;">
+               <div class="image unit-9" 
+                  style="background-image: url('${pageContext.request.contextPath}/resources/image/img_1.jpg');border-radius:5px; "></div>
+               <div class="unit-9-content-9 title"  style="margin-bottom:20%;">
+                  <h3 style="margin-top:10px;"><a href="/memberInfo/resListPage?id=${myList.space_id}">${myList.space_title}</a></h3>
+                  <span class="info" style="color:#a3a3a3;"> ${myList.space_address} </span>
+               </div>
+            </a>
+         </div>
+      </c:forEach>
+   </div>
+   
+   
 
 <script type="text/javascript">
 	$(document).ready(function(){
