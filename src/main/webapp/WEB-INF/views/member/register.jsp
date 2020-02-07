@@ -166,8 +166,8 @@ $(document).ready(function(e){
 	$("button[type='submit']").on("click", function(e){
 	   
 		e.preventDefault();				
-//	    if(checkFormData()==false) //form input이 입력되었는지, 올바른지 확인
-//	        return;
+	    if(checkFormData()==false) //form input이 입력되었는지, 올바른지 확인
+	        return;
         
 		//전화번호 데이터를 넘길때 다시 -를 삭제하고 보낸다.
 	    var phone = $("input[name='phone']").val().replace(/\-/g,'');
