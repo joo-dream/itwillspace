@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>예약 정보 확인</title>
+	<title>예약 수정 확인</title>
 	<script src="https://kit.fontawesome.com/aeb2899479.js" crossorigin="anonymous"></script>
 </head>
 <style>
@@ -70,7 +70,7 @@
 
 <div class="res_alert" style="margin-bottom: 50px;">
     <i class="fas fa-check-circle"></i><br>
-    <h1>예약이 완료되었습니다!</h1>
+    <h1>예약이 수정되었습니다!</h1>
 </div>
 
 <hr style="width:80%; margin-bottom: 50px;">
@@ -78,7 +78,7 @@
 <div class="res_warn">
     
     <p style="margin-top:10px;"><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;예약 페이지에 입력하신 이름과 번호로 현장에서 본인 확인이 진행됩니다. </p>
-    <p><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;변경하실 에약 사항이 있으시다면 개인 페이지에서 수정해주시기 바랍니다.</p>
+    <p><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;변경하실 예약 사항이 있으시다면 개인 페이지에서 수정해주시기 바랍니다.</p>
     <p><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;공간에 대한 추가 문의사항은 호스트와 직접 연락해주세요</p>
     <p><i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;기한 내에 호스트의 계좌로 입금을 완료해주세요</p>
     <br><br>
@@ -86,35 +86,23 @@
     <div>
        <br>
         <strong><i class="fas fa-user-secret"></i>&nbsp;호스트 정보</strong>
-        <p>호스트 연락처 : </p>
-        <p>호스트 계좌번호 : </p>
+        <p>입금 금액 : ${spaceVO.space_price}</p>
+        <p>호스트 계좌번호 : ${spaceVO.space_account}</p>
         <br>
-    </div>
-    
-    <div style="margin-top: 50px;">
-       <br>
-        <strong><i class="fas fa-user-friends"></i>&nbsp;예약 정보</strong>
-        <p>예약자 : ${view.res_name}</p>
-        <p>예약자 연락처: ${view.res_phone}</p>
-        <p>예약 인원 : ${view.res_people}</p>
-        <p>예약 날짜 : ${view.res_date}</p>
-        <p>이용 시간 : ${view.res_time}</p>
-        <br>
-    </div>
-</div>
-
-<div class="btnBox" style="margin-top: 50px;">
-    <a href="../memberInfo/myPage">
-        <input type='button' class="btn btn-primary btn-user btn-block" value="My Page로 이동">
-    </a>
-    <a href="../space/list">
-        <input type="button" class="btn btn-primary btn-user btn-block" value="방 리스트로 이동">
-    </a>	
+    </div>    
     
 </div>
 
-
-
+<div class="btnBox">   
+         
+         <button type="button"  class="col-1-4 res_form_btn" onclick="location.href='../memberInfo/myPage?num=1'">
+         MY PAGE
+         </button>      
+         
+         <button type="button" class="col-1-4 res_form_btn" onclick="location.href='../space/list'">
+         SPACE LIST
+         </button>
+</div>
 
 </body>
 </html>

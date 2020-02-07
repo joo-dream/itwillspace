@@ -26,6 +26,7 @@
 		<security:intercept-url pattern="/memberInfo/myPage" access="hasAnyRole('ROLE_MEMBER,ROLE_HOST')" />
 		<security:intercept-url pattern="/reservation/booking" access="hasAnyRole('ROLE_MEMBER,ROLE_HOST')" />
 		<security:intercept-url pattern="/reservation/bookingConfirm" access="hasAnyRole('ROLE_MEMBER,ROLE_HOST')" />
+		<security:intercept-url pattern="/reservation/delete" access="hasAnyRole('ROLE_MEMBER,ROLE_HOST')" />
 		
 		<security:access-denied-handler ref="myAccessDenied" />
 		<security:form-login 

@@ -16,8 +16,9 @@ public class ReservationVO {
 	private String res_name;
 	private String res_phone;	
 	private String userId;	
-	private int res_roomId;
+	private int space_id;
 	private int res_price;	
 	private String res_account;	
+	private String res_title;
 	
 }

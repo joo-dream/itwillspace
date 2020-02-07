@@ -216,6 +216,18 @@ h2.heading {
   transition: color 0.3s, top 0.3s, background-color 0.8s;
   background-color: white;
 }
+.controls label.modify {
+  position: absolute;
+  left: 0px;
+  top: -15px;
+  width: auto;
+  color: #555;
+  background-color:white;
+  font-size: 16px;
+  display: inline-block;
+  padding: 4px 10px;
+  font-weight: 400;
+}
 .controls label.active {
   top: -15px;
   color: #555;

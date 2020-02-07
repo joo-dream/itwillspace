@@ -11,22 +11,6 @@
  */
  
 (function($, undefined) {
-	
-//	$('fc-day').on(click, function tdClick(ev) {
-//		
-//		// 과거가 아니고
-//		alert('예약불가!');
-//		
-//		
-//		// 예약이 1개만 있는 날이 아니면
-//		
-//		// 실행
-//		
-//		
-//	});
-
-
-;;
 
 var defaults = {
 
@@ -510,6 +494,7 @@ function Calendar(element, options, eventSources) {
 			currentView.setEventData(events); // for View.js, TODO: unify with renderEvents
 			currentView.renderEvents(events, modifiedEventID); // actually render the DOM elements
 			currentView.trigger('eventAfterAllRender');
+			//alert('이기능인지 확인해보자!!!!!!');
 		}
 	}
 
@@ -2466,6 +2451,7 @@ function BasicView(element, calendar, viewName) {
 	function dayBind(days) {
 		days.click(dayClick)
 			.mousedown(daySelectionMousedown);
+		//  달력을 누르면 무조건 얘가 호출됨 (2470)
 	}
 	
 	
@@ -3297,6 +3283,7 @@ function AgendaView(element, calendar, viewName) {
 	function dayBind(cells) {
 		cells.click(slotClick)
 			.mousedown(daySelectionMousedown);
+		alert('3302');
 	}
 
 
@@ -3308,6 +3295,7 @@ function AgendaView(element, calendar, viewName) {
 	
 	function slotClick(ev) {
 		if (!opt('selectable')) { // if selectable, SelectionManager will worry about dayClick
+			alert('3313번째 줄');
 			var col = Math.min(colCnt-1, Math.floor((ev.pageX - dayTable.offset().left - axisWidth) / colWidth));
 			var date = cellToDate(0, col);
 			var rowMatch = this.parentNode.className.match(/fc-slot(\d+)/); // TODO: maybe use data
@@ -3340,7 +3328,9 @@ function AgendaView(element, calendar, viewName) {
 
 		for (var i=0; i<segments.length; i++) {
 			var segment = segments[i];
+			alert('3348');
 			dayBind(
+					
 				renderCellOverlay(
 					segment.row,
 					segment.leftCol,
@@ -3613,8 +3603,10 @@ function AgendaView(element, calendar, viewName) {
 				if (dates) {
 					if (+dates[0] == +dates[1]) {
 						reportDayClick(dates[0], false, ev);
+						alert('3619');
 					}
 					reportSelection(dates[0], dates[3], false, ev);
+					alert('3622');
 				}
 			});
 		}
@@ -3623,6 +3615,7 @@ function AgendaView(element, calendar, viewName) {
 
 	function reportDayClick(date, allDay, ev) {
 		trigger('dayClick', dayBodyCells[dateToCell(date).col], date, allDay, ev);
+		alert('3631');
 	}
 	
 	
@@ -5909,16 +5902,19 @@ function SelectionManager() {
 		trigger('select', null, startDate, endDate, allDay, ev);
 	}
 	
-	
+	// 마우스로 날짜를 클릭시 실행됨
 	function daySelectionMousedown(ev) { // not really a generic manager method, oh well
 		var cellToDate = t.cellToDate;
 		var getIsCellAllDay = t.getIsCellAllDay;
 		var hoverListener = t.getHoverListener();
 		var reportDayClick = t.reportDayClick; // this is hacky and sort of weird
-		if (ev.which == 1 && opt('selectable')) { // which==1 means left mouse button
+		if (ev.which == 1 && opt('selectable')) { // which==1 means left mouse button 
 			unselect(ev);
 			var _mousedownElement = this;
 			var dates;
+			//alert('5931');
+			
+			//클릭된 곳의 색상을 변하게 만든다. + 이벤트 등록하게(5933)
 			hoverListener.start(function(cell, origCell) { // TODO: maybe put cellToDate/getIsCellAllDay info in cell
 				clearSelection();
 				if (cell && getIsCellAllDay(cell)) {
@@ -5928,6 +5924,8 @@ function SelectionManager() {
 					dates = null;
 				}
 			}, ev);
+			
+			//클릭된 곳의 색상을 변하게 만든다.에서 한곳만 변하게 끊어주는 애
 			$(document).one('mouseup', function(ev) {
 				hoverListener.stop();
 				if (dates) {
@@ -5937,6 +5935,10 @@ function SelectionManager() {
 					reportSelection(dates[0], dates[1], true, ev);
 				}
 			});
+
+
+			
+			
 		}
 	}
 

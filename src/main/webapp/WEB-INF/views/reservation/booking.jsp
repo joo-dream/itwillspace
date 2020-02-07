@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Reservation Form</title>
+<title>예약하기</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -25,7 +25,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
    
 <script src="https://kit.fontawesome.com/aeb2899479.js" crossorigin="anonymous"></script>
-
+<script src="<c:url value="/resources/js/moment.js" />"></script>
 </head>
 
 <%--
@@ -35,42 +35,48 @@
 --%>
 
 <body style="margin: 50px auto; width: 80%;">
-
-
    <form action="/reservation/booking" method="post" accept-charset="utf-8">
-   
-   
-      
-   
-      <!-- pUserId -->
+   		<!-- pUserId -->
         <sec:authentication property="principal.username" var="pUserId"/>
         <input type ="hidden" name='userId' value="${pUserId}" >
         
-        <input type ="text" name='space_id' value="${myList.space_id}" >
-        <input type ="text" name='space_price' value="${myList.space_price}" >
+        <!-- space에서 받아온 정보 -->
+  		<input type ="hidden" name='space_id' value="${spaceVO.space_id}" >
+  		<input type ="hidden" name='space_address' value="${spaceVO.space_address}" >
+  		<input type ="hidden" name='res_account' value="${spaceVO .space_account}" >
+  		<input type ="hidden" name='res_title' value="${spaceVO .space_title}" >
+        
+        <c:forEach items="${reservedListBySpace}" var="reservedListBySpace">
+           <input type ="hidden" name='resdbResdate' id="resdbResdate" list="depList" >
+           <datalist id="depList">
+              <option value="${reservedListBySpace.res_date}"></option>
+          </datalist>
+      </c:forEach>
       
       <div class="form-group" style="float:left; width:40%; display:inline-block;">
          <h2 class="heading">예약자 개인 정보</h2>
          <div class="controls">
-            <input type="text" id="name" class="floatLabel" name="res_name" placeholder="방문하시는 분의 성함을 적어주세요">
+            <input type="text" title="예약자 이름" id="name" class="floatLabel" name="res_name" placeholder="방문하시는 분의 성함을 적어주세요">
             <label for="name">예약자 이름</label>
          </div>
          
          <div class="controls">
-            <input type="text" id="email" class="floatLabel" name="res_phone" placeholder="ex) 010-1234-5678">
-            <label for="email">예약자 번호</label>
+            <input type="text" title="예약자 번호" id="phone" class="floatLabel" name="res_phone" placeholder="ex) 010-1234-5678">
+            <label for="phone">예약자 번호</label>
          </div>
          
-         <!-- res_date : hidden 값만 넘겨주는 용 -->
-         <div class="controls">
-            <input type="hidden" id="res_date" name="res_date">
-         </div>
+         <!-- res_date -->
+            <div class="controls">
+               <input type="text" title="예약 날짜" id="date" class="floatLabel" name="res_date" placeholder="ex) YYYY-mm-DD" >
+               <label for="date">예약 날짜</label>
+            </div>
          
          <div class="grid">
             <div class="controls">
                <i class="fa fa-sort"></i> 
-                <select class="floatLabel" name="res_people">
-                  <option value="2 ~ 4 명" selected>2 ~ 4 명</option>
+                <select class="floatLabel" name="res_people" id="res_people" title="이용 인원">
+                  <option value="" selected></option>
+                  <option value="2 ~ 4 명">2 ~ 4 명</option>
                   <option value="5 ~ 7 명">5 ~ 7 명</option>
                   <option value="8명 이상">8명 이상</option>
                </select> 
@@ -81,8 +87,9 @@
          <div class="grid">
             <div class="controls">
                <i class="fa fa-sort"></i> 
-               <select class="floatLabel" name="res_time">
-                  <option value="09:00-15:00" selected>09:00-15:00</option>
+               <select class="floatLabel" name="res_time" id="res_time" title="이용 시간">
+                  <option value="" selected></option>
+                  <option value="09:00-15:00">09:00-15:00</option>
                   <option value="15:00-21:00">15:00-21:00</option>
                   <option value="21:00-03:00">21:00-03:00</option>
                   <option value="종일">종일</option>
@@ -120,19 +127,93 @@
       </div>
       
       <!--  res_date -->
-      <div class="form-group" style="float:right; width:50%; display:inline-block;">
+      <div class="form-group" style="float:right; width:50%; display:inline-block; position:relative;">
          <h2 class="heading">예약할 날짜 </h2>
          
-         
          <%@include file="calendar.jsp"%>
+         
+         <hr style="margin:50px 0 20px 0;" >
+         <div style="position:absolute; left:0; text-align:left; width:100%;">
+            
+            <small>
+            <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+             ${spaceVO.space_title}의  예약 현황입니다!</small><br>
+            <small>
+            <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+             달력을 보고 날짜를 직접 기입해주세요! </small><br>
+            <small>
+            <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+             입력하실때, 반드시 형식을 맞춰주시기 바랍니다! </small><br>
+            <small>
+            <i class="fas fa-exclamation-circle"></i>&nbsp;&nbsp;
+             기입하지 않은 사항이 있을 시, 예약이 불가합니다! </small>
+         </div>
          
       </div>
       
       <div class="button_here" style="float:center; width:100%; display:inline-block; margin-top:30px;">   
          <br>
-         <button type="submit"  class="col-1-4 res_form_btn" data-component="button">
+         <button type="button"  class="col-1-4 res_form_btn modBtn" data-component="button" onclick="d(event)">
          예약하기&nbsp;&nbsp;<i class="far fa-check-circle"></i>
          </button>
+         
+         <script>
+            // 유효성 _ date 확인('YYYY-MM-DD', 유효한 날짜, 이미 예약된 날짜)
+            function d(e){
+               
+               var list = new Array(); 
+               <c:forEach items="${reservedListBySpace}" var="reservedListBySpace">
+                  list.push("${reservedListBySpace.res_date}");
+               </c:forEach>
+               console.log(list);
+
+               var date_pattern = /^(19|20)\d{2}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[0-1])$/; 
+
+               var today = new Date();
+               var dd = today.getDate();
+               var mm = today.getMonth()+1; // 0월부터 시작함
+               var yyyy = today.getFullYear();
+
+               var outyyyy = $('#date').val().substring(0,4);
+               var outmm = $('#date').val().substring(5,7);
+               var outdd = $('#date').val().substring(8,10);
+               console.log(outyyyy+"/"+outmm+"/"+outdd);
+
+               var dbdate = $('#resdbResdate#depList').attr('value');
+               
+               if(!date_pattern .test($('#date').val())){
+                  alert('예약 날짜를 알맞은 형식으로 입력해주세요!!');
+                  $('#date').focus();
+                  $('#date').val('');
+               } else if(list.includes($('#date').val()) == true){
+                  alert("이미 예약된 날입니다! 다른 날을 입력해주세요");
+                  $('#date').focus();
+                  $('#date').val('');
+               } else if((outyyyy < yyyy) || (outyyyy>= yyyy && outmm<mm) || (outyyyy>=yyyy && outmm>= mm && outdd<dd)){
+                  alert("유효하지 않은 날짜를 입력하셨습니다! 다시 입력해주세요");
+                  $('#date').focus();
+                  $('#date').val('');
+               } else if((outmm==4&&outdd>30)||(outmm==6&&outdd>30)||(outmm==9&&outdd>30)||(outmm==11&&outdd>30)){
+                  alert("유효하지 않은 날짜를 입력하셨습니다! 다시 입력해주세요");
+                  $('#date').focus();
+                  $('#date').val('');
+               }else if($('#name').val()=="" || $('#name').val()==null){
+                  alert($('#name').attr("title") + "을 입력해주세요");
+               }else if($('#phone').val()=="" || $('#phone').val()==null){
+                  alert($('#phone').attr("title") + "를 입력해주세요");
+               }else if($('#date').val()=="" || $('#date').val()==null){
+                  alert($('#date').attr("title") + "를 입력해주세요");
+               }else if($('#res_people').val()=="" || $('#res_people').val()==null){
+                  alert($('#res_people').attr("title") + "를 입력해주세요");
+               }else if($('#res_time').val()=="" || $('#res_time').val()==null){
+                  alert($('#res_time').attr("title") + "를 입력해주세요");
+               }else {
+                  $('.modBtn').attr('type','submit');
+               }
+               
+            }
+         </script>
+         
          <button type="reset" class="col-1-4 res_form_btn" data-component="button" onclick="history.go(-1);">
          취소하기&nbsp;&nbsp;<i class="far fa-times-circle"></i>
          </button>
@@ -142,6 +223,7 @@
    
 <script>
 (function($){
+
    function floatLabel(inputType){
       $(inputType).each(function(){
          var $this = $(this);
@@ -159,6 +241,8 @@
    }
    // just add a class of "floatLabel to the input field!"
    floatLabel(".floatLabel");
+
+   
 })(jQuery);
 </script>
 
@@ -166,4 +250,3 @@
    
 </body>
 </html>
-
