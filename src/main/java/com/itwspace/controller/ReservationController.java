@@ -77,21 +77,20 @@ public class ReservationController {
 		
 		return "reservation/bookingConfirm";		
 	}
-	
-//	@PostMapping("/bookingConfirm")
-//	public String postConfirmView() {			
-//		log.info("bookingConfirm PostMapping");
-//		return "memberInfo/myPage";
-//	}		
-			
-	
+		
 	@GetMapping("/modify")
-	public void getModify(@RequestParam("reservationId") int reservationId, Model model) {
-		log.info("getmodify....." + reservationId);
-		ReservationVO vo = service.view(reservationId);			
-		log.info("getmodify....." + vo);
-		model.addAttribute("view", vo);			
-	}	
+	   public void getModify(@RequestParam("reservationId") int reservationId, Model model) {
+	      log.info("getmodify....." + reservationId);
+	      ReservationVO vo = service.view(reservationId);         
+	      log.info("getmodify....." + vo);
+	      model.addAttribute("view", vo);      
+	      
+	      int a = vo.getSpace_id();
+	      
+	      model.addAttribute("reservedListBySpace", service.reservedListBySpace(a));
+	      log.info("spaceId ===>>>" + a);
+	      log.info("들어왔니???" + service.reservedListBySpace(a));
+	   }   
 	
 	@PostMapping("/modify")
 	public String postModify(@RequestParam("space_id") int space_id, Model model, ReservationVO resVO, RedirectAttributes rttr) throws Exception {		
