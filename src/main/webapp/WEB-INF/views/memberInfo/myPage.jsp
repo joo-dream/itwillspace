@@ -123,6 +123,7 @@
           &nbsp;&nbsp;&nbsp;<i class="fas fa-clock"></i>&nbsp;&nbsp;&nbsp;&nbsp;예약 시간&nbsp;|&nbsp; ${reservedList.res_time}<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-male"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;예약 인원  &nbsp;|&nbsp; ${reservedList.res_people}<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<i class="fas fa-dollar-sign"></i>&nbsp;&nbsp;&nbsp;&nbsp;이용 금액  &nbsp;|&nbsp; ${reservedList.res_price}<br>
+          &nbsp;&nbsp;&nbsp;<i class="fas fa-user-clock"></i>&nbsp;&nbsp;예약 정보  &nbsp;|&nbsp; ${reservedList.res_name} , ${reservedList.res_phone} <br>
      </p>
      <div class="card__action-bar">
        <button class="card__button"  onclick="location.href='/reservation/modify?reservationId=${reservedList.reservationId}' ">예약 수정</button>
