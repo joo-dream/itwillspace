@@ -61,8 +61,6 @@
 				<div class="row align-items-center">
 					<div class="col-8 col-md-8 col-lg-4">
 						<h1 class="mb-0">
-							<a href="index.html" class="text-white h2 mb-0"><strong>ITW SPACE<span
-							<a href="/" class="text-white h2 mb-0"><strong>ITW SPACE<span
 							<a href="/" class="text-white h2 mb-0"><strong>ITW SPACE<span>
 									class="text-primary">.</span></strong></a>
 						</h1>
