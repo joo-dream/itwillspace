@@ -9,7 +9,7 @@
 	<title>공간 정보 수정</title>
 	<%@ include file="../includes/header.jsp" %>
 </head>
-<body class="bg-gradient-primary">
+<body>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {

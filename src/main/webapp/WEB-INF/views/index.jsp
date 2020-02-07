@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
    prefix="sec"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 
 
 <!-- 부트스트랩 -->
@@ -144,83 +145,12 @@
                data-aos-delay="400">
                <h1 class="mb-4">가나다라마바사</h1>
                <p class="mb-5">Choose Your Space! Party!! Semina!! fjrigje</p>
-               <p>
-                  <a href="#" class="btn btn-primary px-5 py-3">Host 등록하기</a>
-               </p>
+               
             </div>
          </div>
       </div>
    </div>
 
-
-   
-
-
-   <div class="site-section">
-
-      <div class="container roomDivisionContainerLarge">
-         <div class="row roomDivisionContainer">
-            <div
-               class="site-section-heading text-center mb-5 col-md-8 mx-auto"
-               data-aos="fade-up">
-               <h2 class="mb-5">다양한 종류의 특별한 스페이스</h2>
-               <p>
-               아이티윌스페이스는 다양한 종류의 특별한 스페이스를 제공합니다.<br>
-               Party Room, Semina, Practice Room...Party Room, Semina, Practice Room...</p>
-            </div>
-         </div> 
-
-         <div class="site-block-retro d-block d-md-flex">
-
-            <a href="#" class="col1 unit-9 no-height" data-aos="fade-up"
-               data-aos-delay="100" >
-               <div class="image" onmouseover="dd(event);"
-                  style="background-image: url('${pageContext.request.contextPath}/resources/image/img_2.jpg');"></div>
-               
-               <div class="hoverCont">
-               fsdgsgfs
-               </div>
-               <!--  
-               <div class="unit-9-content">
-               
-                  <h2>PARTY ROOM</h2>
-                  <span>CLick ME!</span>
-               
-               </div>
-               -->
-            </a>
-
-            <div class="col2 ml-auto">
-
-               <a href="#" class="col2-row1 unit-9 no-height" data-aos="fade-up"
-                  data-aos-delay="200">
-                  <div class="image"
-                     style="background-image: url('${pageContext.request.contextPath}/resources/image/img_3.jpg');"></div>
-                  <div class="unit-9-content">
-                  <!--  
-                     <h2>SEMINA</h2>
-                     <span>CLick ME!</span>
-                  -->
-                  </div>
-               </a> 
-               <a href="#" class="col2-row2 unit-9 no-height" data-aos="fade-up"
-                  data-aos-delay="300">
-                  <div class="image"
-                     style="background-image: url('${pageContext.request.contextPath}/resources/image/img_1.jpg');"></div>
-                  <div class="unit-9-content">
-                  <!--  
-                     <h2>PRACTICE ROOM</h2>
-                     <span>CLick ME!</span>
-                  -->
-                  </div>
-               </a>
-
-            </div>
-
-         </div>
-
-      </div>
-   </div>
 
    <!-- 방 리스트로 쭉~ 보여주기 => 클릭시, 방 상세 페이지로 이동 -->
    <div class="site-section roomList-container">
@@ -239,7 +169,8 @@
                   data-aos-delay="100" >
                   <a href="/space/detail?space_id=1" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
                      <div class="image"
-                        style="background-image: url('${pageContext.request.contextPath}/resources/image/img_1.jpg');border-radius:5px; "></div>
+                      style="background-image: url('<spring:url value='/img/img_1.jpg' />');border-radius:5px; ">
+                      </div>
                      <div class="unit-9-content">
                         <h2>${spaceVO.space_title}</h2>
                         <span> ${spaceVO.space_price} </span>
