@@ -4,14 +4,15 @@ import java.util.List;
 
 import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
+import com.itwspace.paging.Criteria;
 
 public interface SpaceService {
 
-	public void register(SpaceVO board);
+	public void register(SpaceVO board) throws Exception;
 
-	public SpaceVO get(String space_id);
+	public SpaceVO get(String space_id) throws Exception;
 
-	public List<SpaceVO> list();
+	public List<SpaceVO> list() throws Exception; 
 	
 	public List<SpaceVO> myList(String userId);
 
@@ -19,9 +20,9 @@ public interface SpaceService {
 
 	public void delete(int id) throws Exception;
 
-	public int count() throws Exception;
+	public int getTotalCount(Criteria cri) throws Exception;
 
-	public List<SpaceVO> listPage(int startPost, int countList) throws Exception;
+	public List<SpaceVO> listPage(Criteria cri) throws Exception;
 
 	public void write(SpaceVO vo) throws Exception;
 

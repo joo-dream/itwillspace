@@ -12,6 +12,7 @@ import com.itwspace.mapper.SpaceMapper;
 
 import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
+import com.itwspace.paging.Criteria;
 
 import lombok.extern.log4j.Log4j;
 
@@ -82,24 +83,16 @@ public class SpaceServiceImpl implements SpaceService {
 			});
 		}		
 	}
-	
-	@Transactional
+
 	@Override
-	public void delete(int id) throws Exception {
-		log.info("delete....." + id);
-		attachMapper.deleteAll(id);
-		mapper.delete(id);
+	public int getTotalCount(Criteria cri) throws Exception{
+		log.info("count…..");
+		return mapper.getTotalCount(cri);
 	}
 
 	@Override
-	public int count() throws Exception{
-		log.info("count....." );
-		return mapper.count();
-	}
-
-	@Override
-	public List<SpaceVO> listPage(int startPost, int countList) throws Exception {
-		return mapper.listPage(startPost, countList);
+	public List<SpaceVO> listPage(Criteria cri) throws Exception {
+		return mapper.listPage(cri);
 	}
 	
 	//1.29 add getAttachList(String space_id)
@@ -108,6 +101,14 @@ public class SpaceServiceImpl implements SpaceService {
 		log.info("get Attach list by space_id" + space_id);
 
 		return attachMapper.findBySpaceId(space_id);
+	}
+	
+	@Transactional
+	@Override
+	public void delete(int id) throws Exception {
+		log.info("delete....." + id);
+		attachMapper.deleteAll(id);
+		mapper.delete(id);
 	}
 
 	@Transactional

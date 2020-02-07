@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
+import com.itwspace.paging.Criteria;
 
 public interface SpaceMapper {
 	
@@ -19,16 +20,16 @@ public interface SpaceMapper {
 
 	public SpaceVO view(int id);
 
-	public int count();
+	public int getTotalCount(Criteria cri);
 
-	public List<SpaceVO> listPage(int startPost, int countList);
+	public List<SpaceVO> listPage(Criteria cri);
 
 	public void write(SpaceVO vo);
 
 	public List<SpaceVO> list();
 	
-	public List<SpaceVO> myList(String userId);
-	
+	public List<SpaceVO> myList(String userId); //20.01.22 경로문제로 인한 문제해결
+
 	public void deleteAll(String space_id);
 
 	public int delete(String space_id);
@@ -38,3 +39,4 @@ public interface SpaceMapper {
 	public List<SpaceVO> hostPage(@Param("startPost") int startPost, @Param("countList")int countList);
 	
 }
+

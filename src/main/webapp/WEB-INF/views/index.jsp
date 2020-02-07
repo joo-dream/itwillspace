@@ -80,7 +80,7 @@
 
                      <ul class="site-menu js-clone-nav d-none d-lg-block">
                         <li class="active"><a href="/">Home</a></li>
-                        <li class="has-children"><a href="/space/list">space
+                        <li class="has-children"><a href="/space/listPage?page=1">space
                               List</a>
                            <ul class="dropdown arrow-top">
                               <li><a href="#">Party Room</a></li>
@@ -250,7 +250,7 @@
             
             <!-- space List로 이동 버튼  -->
             <div class="col-md-12 text-center mt-5" data-aos="fade-up">
-               <a href="/space/list" class="btn btn-primary">Space 더 둘러보기</a>
+               <a href="/space/listPage?page=1" class="btn btn-primary">Space 더 둘러보기</a>
             </div>
 
          </div>

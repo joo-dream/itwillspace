@@ -14,6 +14,39 @@
 		from space where userId = #{userId}
 </select>
 
+<sql id="searchCondition">
+	<if test="searchType != null">
+		<if test="searchType == 'title'.toString()">
+			where space_title like concat('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'type'.toString()">
+			where space_kind like concat('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'address'.toString()">
+			where space_address like concat('%', #{keyword}, '%')
+		</if>
+		<if test="searchType == 'all'.toString()">
+			where (space_title like concat('%', #{keyword}, '%')
+				or space_kind like concat('%', #{keyword}, '%')
+				or space_address like concat('%', #{keyword}, '%'))
+		</if>
+	</if>
+</sql>
+
+<select id="listPage" resultType="com.itwspace.model.SpaceVO">
+		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
+		from space 
+		<include refid="searchCondition"></include>
+		order by space_id desc
+		limit #{pageStart}, #{perPageNum}
+</select>
+
+<select id="getTotalCount" resultType="int">
+      	select count(space_id) from space
+		<include refid="searchCondition"></include>
+      
+</select>
+
 <insert id="write" parameterType="com.itwspace.model.SpaceVO" useGeneratedKeys="true" keyProperty="space_id">
 	 	insert into space(space_id, userId, space_kind, space_title, space_price, space_address, space_content, space_account)
 		values(#{space_id}, #{userId}, #{space_kind}, #{space_title}, #{space_price}, #{space_address},
@@ -35,17 +68,6 @@
 <delete id="delete" parameterType="int">
 		delete from space where space_id=#{space_id}
 </delete>
-
-<select id="count" resultType="int">
-		select count(space_id) from space
-</select>
-
-<select id="listPage" resultType="com.itwspace.model.SpaceVO">
-		select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate
-		from space
-		order by space_id desc
-		limit #{startPost}, #{countList}
-</select>
 
 <select id="hostPage" resultType="com.itwspace.model.SpaceVO">
 		select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate

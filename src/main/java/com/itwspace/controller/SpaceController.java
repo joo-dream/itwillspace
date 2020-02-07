@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
+import com.itwspace.paging.Criteria;
+import com.itwspace.paging.PageMaker;
 import com.itwspace.service.SpaceService;
 
 import lombok.extern.log4j.Log4j;
@@ -51,6 +53,7 @@ public class SpaceController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String postWrite(SpaceVO vo) throws Exception {
+		
 		if (vo.getAttachList() != null) {
 			vo.getAttachList().forEach(attach -> log.info(attach));
 		}
@@ -87,31 +90,21 @@ public class SpaceController {
 		return "redirect:/space/list";
 	}
 	
-	
 	@RequestMapping(value="/listPage", method=RequestMethod.GET)
-	public void getListPage(Model model, @RequestParam("page") int page)throws Exception{
-		int totalPost = service.count();
-		int countList=10;
-		int totalPage=(int)Math.ceil((double)totalPost/countList);
-		int startPost = (page - 1) * countList;
-		int countPage = 10;
-		int endPage = (int)(Math.ceil((double)page/(double)countPage)*countPage);
-		int startPage = endPage -(countPage - 1);
-		if(endPage > totalPage) {
-			endPage = totalPage;
-		}
-		
-		boolean prev = startPage == 1? false : true;
-		boolean next = endPage >= totalPage ? false : true;
-		
-		List<SpaceVO> list = service.listPage(startPost, countList);
-		model.addAttribute("list", list);
-		model.addAttribute("countList", countList);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("prev", prev);
-		model.addAttribute("next", next);
-		model.addAttribute("curPage", page);
+	public void getListPage(Criteria cri, Model model)throws Exception {
+		log.info("listPage…..");
+        //현재 페이지에 해당하는 게시물을 조회해 옴 
+		List<SpaceVO> boards = service.listPage(cri);
+        //모델에 추가
+		model.addAttribute("list",boards);
+        //PageMaker 객체 생성
+		PageMaker pageMaker = new PageMaker(cri);
+        //전체 게시물 수를 구함
+		int totalCount = service.getTotalCount(cri);
+        //pageMaker로 전달 -> pageMaker는 startPage, endPage, prev, next를 계산함
+		pageMaker.setTotalCount(totalCount);
+        //모델에 추가
+		model.addAttribute("pageMaker", pageMaker);
 		
 	}
 	
@@ -145,7 +138,6 @@ public class SpaceController {
 		log.info("getAttachList " + space_id);
 		
 		return new ResponseEntity<>(service.getAttachList(space_id), HttpStatus.OK);
-
-	}
-	
+	}	
+		
 }	
