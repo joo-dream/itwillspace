@@ -7,36 +7,64 @@
 	<title>공간 리스트</title>
 	<%@include file="../includes/header.jsp"%>  
 </head>
+<body class="bg-gradient-primary">
+<script>
+#(document).ready(function(){
+	$("#myInput").on("keyup",function(){
+		var value = $(this).val().toLowerCase();
+		$("#myTable tr").filter(function(){
+			if(!$(this).hasClass("info")){
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			}
+		});
+	});
+});
+</script>
 <body>
 
 
-
-
 <div class="container">
-	<h2>공간 목록</h2>
-	<hr>
+
+	<!-- framework -->
+	<div class="row justify-content-center">
+
+	<div class="col-xl-6 col-lg-12 col-md-9">
+
+	<div class="card o-hidden border-0 shadow-lg my-5">
+	<div class="card-body p-0">
+	
+	<!-- Nested Row within Card Body -->
+	<div class="row">
+	<div class="col-lg-12">
+	<div class="p-5">
+	<div class="text-center">
+		<h1 class="h4 text-gray-900 mb-4">공간정보 작성</h1>
+	</div>
+	
+	<input id="myInput" type="text" placeholder="검색..">
+	<br><br>
 	<table class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr class="info">
-				<th width="100">번   호</th>
-				<th width="100">제   목</th>
-				<th width="100">방타입</th>
-				<th width="100">방가격</th>
-				<th width="150">방주소</th>
-				<th width="450">방상세정보</th>
-				<th width="200">계   좌</th>
+				<th width="60">번   호</th>
+				<th width="140">제   목</th>
+				<th width="100">타   입</th>
+				<th width="150">가   격</th>
+				<th width="250">주   소</th>
+				<th width="150">계   좌</th>
+				<th width="150">작성일</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${list}" var="list">
-			<tr>
+			<tr class="trs">
 				<td>${list.space_id}</td>
 				<td><a href="/space/view?id=${list.space_id}">${list.space_title}</a></td>
 				<td>${list.space_kind}</td>
 				<td>${list.space_price}</td>
 				<td>${list.space_address}</td>
-				<td>${list.space_content}</td>
 				<td>${list.space_account}</td>
+				<td>${list.space_regDate}</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -63,6 +91,13 @@
 		</c:if>
 	</div>
 
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 </div>
 
 </body>

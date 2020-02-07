@@ -1,15 +1,24 @@
 package com.itwspace.controller;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
 import com.itwspace.service.SpaceService;
 
@@ -42,6 +51,10 @@ public class SpaceController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String postWrite(SpaceVO vo) throws Exception {
+		if (vo.getAttachList() != null) {
+			vo.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
 		service.write(vo);
 		return "redirect:/memberInfo/hostPage";
 	}
@@ -101,4 +114,38 @@ public class SpaceController {
 		model.addAttribute("curPage", page);
 		
 	}
+	
+	private void deleteFiles(List<SpaceAttachVO> attachList) {
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		    
+		log.info("delete attach files...................");
+		log.info(attachList);
+		
+		attachList.forEach(attach -> {
+			try {        
+				Path file  = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\" + attach.getUuid()+"_"+ attach.getFileName());	
+				Files.deleteIfExists(file);	
+				if(Files.probeContentType(file).startsWith("image")) {	
+					Path thumbNail = Paths.get("C:\\upload\\"+attach.getUploadPath()+"\\s_" + attach.getUuid()+"_"+ attach.getFileName());	      
+					Files.delete(thumbNail);
+				}
+		
+			}catch(Exception e) {
+				log.error("delete file error" + e.getMessage());
+			}
+		});
+	}
+	
+	@GetMapping(value = "/getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<SpaceAttachVO>> getAttachList(int space_id) throws Exception {
+
+		log.info("getAttachList " + space_id);
+		
+		return new ResponseEntity<>(service.getAttachList(space_id), HttpStatus.OK);
+
+	}
+	
 }	

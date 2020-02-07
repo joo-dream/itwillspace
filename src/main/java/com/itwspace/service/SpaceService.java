@@ -2,6 +2,7 @@ package com.itwspace.service;
 
 import java.util.List;
 
+import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
 
 public interface SpaceService {
@@ -25,4 +26,11 @@ public interface SpaceService {
 	public void write(SpaceVO vo) throws Exception;
 
 	public SpaceVO view(int id) throws Exception;
+	
+	public List<SpaceAttachVO> getAttachList(int space_id) throws Exception;
+
+	boolean remove(String space_id) throws Exception;
+	
+	public List<SpaceVO> hostPage(int startPost, int countList) throws Exception;
+
 }

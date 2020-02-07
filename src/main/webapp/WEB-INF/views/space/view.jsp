@@ -14,23 +14,44 @@
 	<br><br><br>
 
 	<div class="container">
+	
 		<h2>공간 내용</h2>
 		<hr>
+<!--		
+		<img src="/resources/image/test2.jpg" id = "spaceImg" class="m-3" style="width:200px;height:250px ">
+		<br>
+    	<h3 class = " ml-4 media-title"> ${space.space_image}</h3>
+-->
+<!-- 방 사진 보여주기 yeounjoo start-->
+		<div class="card shadow mb-4 border border-secondary">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">공간 상세 이미지</h6>
+			</div>
+	        <div class="card-body">
+			    <div class='uploadResult'> 
+		          <ul class="d-flex flex-wrap">
+		          
+		          </ul>
+	        	</div>							
+	        </div>
+	   </div>
+<!-- 방 사진 보여주기 yeounjoo end-->
+	         	
 		<table style="line-height: 25px;">
 			<tr>
 				<th width="50">제 목</th>
 				<td>${view.space_title}</td>
 			</tr>
 			<tr>
-				<th>방타입</th>
+				<th>타 입</th>
 				<td>${view.space_kind}</td>
 			</tr>
 			<tr>
-				<th>방가격</th>
+				<th>가 격</th>
 				<td>${view.space_price}</td>
 			</tr>
 			<tr>
-				<th>방주소</th>
+				<th>주 소</th>
 				<td>${view.space_address}</td>
 			</tr>
 
@@ -156,6 +177,33 @@
 		var zoomControl = new kakao.maps.ZoomControl();
 		map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	</script>
+
+<!-- 방 사진 보여주기 yeounjoo start-->
+<script>
+$(document).ready(function(){
+  
+  (function(){  
+	  var spaceValue = '<c:out value="${view.space_id}"/>';
+
+    $.getJSON("/space/getAttachList", {space_id: spaceValue}, function(arr){ 
+       console.log("test");        
+       console.log(arr);
+       var str = "";
+       $(arr).each(function(i, attach){       
+           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+           
+           str += "<li class='m-4' data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+           str += "<img src='/display?fileName="+fileCallPath+"' style='width:250px;'>";
+           str += "</div>";
+           str +"</li>";		    
+       }); 
+       $(".uploadResult ul").html(str);             
+     });//end getjson
+    
+  })();//end function
+});
+</script> 
+<!-- 방 사진 보여주기 yeounjoo end-->
 
 <!-- review 등록 yeounjoo start-->
 <script type="text/javascript" src="/resources/js/review.js"></script> 

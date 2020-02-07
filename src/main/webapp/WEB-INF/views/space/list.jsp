@@ -19,10 +19,25 @@ $(document).ready(function(){
   });
 });
 </script>
-<body>
+<body class="bg-gradient-primary">
 
 <div class="container">
-	<h2>공간 목록</h2>
+	
+	<!-- framework -->
+	<div class="row justify-content-center">
+	<div class="col-xl-6 col-lg-12 col-md-9">
+	<div class="card o-hidden border-0 shadow-lg my-5">
+	<div class="card-body p-0">
+	
+	<!-- Nested Row within Card Body -->
+	<div class="row">
+	<div class="col-lg-12">
+	<div class="p-5">
+	<div class="text-center">
+		<h1 class="h4 text-gray-900 mb-4">공간목록</h1>
+	</div>
+	
+	<a href="${path}/space/listPage?page=1">페이지처리</a>
 	<hr>
 	<input id="myInput" type="text" placeholder="검색..">
 	<br><br>
@@ -56,6 +71,14 @@ $(document).ready(function(){
 		</c:forEach>
 		</tbody>
 	</table>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 </div>
 </body>
 </html>

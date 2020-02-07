@@ -6,10 +6,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>방 정보 수정</title>
+	<title>공간 정보 수정</title>
 	<%@ include file="../includes/header.jsp" %>
 </head>
-<body>
+<body class="bg-gradient-primary">
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {
@@ -57,9 +57,21 @@ function daumZipCode() {
 <br><br><br>
 
 <div class="container">
-	<h2>방 정보 수정</h2><hr>
+		
+	<!-- framework -->
+	<div class="row justify-content-center">
+	<div class="col-xl-6 col-lg-12 col-md-9">
+	<div class="card o-hidden border-0 shadow-lg my-g">
+	<div class="card-body p-0">
+		
+	<div class="row">
+	<div class="col-lg-12">
+	<div class="p-5">
+	<div class="text-center">
+		<h2 class="h4 text-gray-900 mb-4">공간정보 수정</h2>
+	</div>
 	
-	<form method="post">
+	<form role="form" method="post">
 		<sec:authentication property="principal.username" var="pUserId"/><input type ="hidden" name='userId' value="${pUserId}" >
 		<table>
 			<tr>
@@ -100,8 +112,182 @@ function daumZipCode() {
 			
 			</tr>
 		</table>
-		<button type="submit">수정</button>
-		
+<!-- 방 사진 등록 yeounjoo start-->		
+		<div class="card shadow mb-4 border border-primary">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6>
+			</div>
+	        <div class="card-body">
+	        	<input multiple="multiple" type="file" name='uploadFile'
+										accept="image/*">
+			    <div class='uploadResult'> 
+		        	<ul class="d-flex flex-wrap">
+		          
+		        	</ul>
+	        	</div>							
+	        </div>
+	    </div>   
+<!-- 방 사진 등록 yeounjoo end-->	     
+		<button type="submit">수정</button>	
 	</form>
+	
+	</div>
+	</div>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+	</div>
 </div>
+<!-- 방 사진 보여주기/수정 yeounjoo start-->
+<script>
+$(document).ready(function(){
+  
+  (function(){  
+	  var spaceValue = '<c:out value="${view.space_id}"/>';
+
+    $.getJSON("/space/getAttachList", {space_id: spaceValue}, function(arr){ 
+       console.log("test");        
+       console.log(arr);
+       var str = "";
+       $(arr).each(function(i, attach){       
+           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+           
+           str += "<li class='m-4' data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"' ><div>";
+           str += "<span> "+ attach.fileName+"</span>";
+           str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' "
+           str += "class='btn btn-secondary btn-circle btn-sm'><i class='fa fa-times'></i></button><br>";           
+           str += "<img src='/display?fileName="+fileCallPath+"' style='width:250px;'>";
+           str += "</div>";
+           str +"</li>";		    
+       }); 
+       $(".uploadResult ul").html(str);             
+     });//end getjson     
+  })();//end function
+
+	var formObj = $("form[role='form']");
+	
+	//submit
+	$("button[type='submit']").on("click", function(e){
+	   
+		e.preventDefault();				
+		    	    
+		var str = "";	
+		$(".uploadResult ul li").each(function(i, obj){
+		     
+			var jobj = $(obj);     
+			console.dir(jobj);
+			console.log(jobj.data("filename"));
+			          
+			str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+			str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";     
+		});   
+		console.log(str);
+	    formObj.append(str).submit();
+	});	
+		
+	var regex = new RegExp("\\.(bmp|gif|jpg|jpeg|png)$", "i");
+	var maxSize = 5242880; //5MB
+
+	//업로드 가능한 파일인지 확인
+	function checkExtension(fileName, fileSize) {
+		if (regex.test(fileName) == false) {
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		if (fileSize >= maxSize) {
+			alert("파일 사이즈 초과");
+			return false;
+		}
+		return true;
+	}
+
+	//업로드 된 사진 화면에 보여주기
+	function showUploadResult(uploadResultArr) {
+		if (!uploadResultArr || uploadResultArr.length == 0) {
+			return;
+		}
+
+		var uploadUL = $(".uploadResult ul");
+		var str = "";
+
+		$(uploadResultArr).each(function(i, obj) {
+			var fileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_"+ obj.fileName);
+				console.log(fileCallPath);
+
+				str += "<li class='m-4' data-path='"+obj.uploadPath+"'";
+				str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
+				str +" ><div>";
+				str += "<span> "+ obj.fileName + "</span>";
+				str += "<button type='button' data-file=\'"+fileCallPath+"\' "
+				str += "data-type='image' class='btn btn-secondary btn-circle btn-sm'><i class='fas fa-times'></i></button><br>";
+				str += "<img src='/display?fileName="+fileCallPath+"' style='width:250px;'>";
+				str += "</div>";
+				str + "</li>";
+			});
+			uploadUL.append(str);
+		}
+
+		//파일 선택후 이미지 파일 저장 	
+		$("input[type='file']").change(function(e) {
+
+			var formData = new FormData();
+
+			var inputFile = $("input[name='uploadFile']");
+
+			var files = inputFile[0].files;
+			for (var i = 0; i < files.length; i++) {
+
+			if (!checkExtension(files[i].name, files[i].size)) {
+				console.log(files);
+				return false;
+			}
+			formData.append("uploadFile",files[i]);
+
+			}
+			console.log(files);
+			$.ajax({
+				url : '/uploadAjaxAction',
+				processData : false,
+				contentType : false,
+				data : formData,
+				type : 'POST',
+				dataType : 'json',
+				success : function(result) {
+				console.log(result);
+				showUploadResult(result); //업로드 결과 처리 함수 	
+				}
+			}); //$.ajax  
+		});
+
+		//첨부된 이미지 파일 삭제
+		$(".uploadResult").on("click","button",function(e) {
+
+			console.log("delete file");
+
+			var uploadImg = $(".card-img");
+			var targetFile = $(this).data("file");
+			var type = $(this).data("type");
+
+			var targetLi = $(this).closest("li");
+
+			$.ajax({
+				url : '/deleteFile',
+				data : {fileName : targetFile, type : type},
+				dataType : 'text',
+				type : 'POST',
+				success : function(result) {
+					//alert("프로파일 설정이 삭제되었습니다.");
+
+					targetLi.remove();
+				}
+			}); //$.ajax
+	});  
+});
+</script> 
+<!-- 방 사진 보여주기/수정 yeounjoo end-->
+
 </html>

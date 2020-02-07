@@ -2,7 +2,9 @@ package com.itwspace.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
+import com.itwspace.model.SpaceAttachVO;
 import com.itwspace.model.SpaceVO;
 
 public interface SpaceMapper {
@@ -26,5 +28,13 @@ public interface SpaceMapper {
 	public List<SpaceVO> list();
 	
 	public List<SpaceVO> myList(String userId);
+	
+	public void deleteAll(String space_id);
+
+	public int delete(String space_id);
+
+	public List<SpaceAttachVO> findBySpace_id(String space_id);
+	
+	public List<SpaceVO> hostPage(@Param("startPost") int startPost, @Param("countList")int countList);
 	
 }
