@@ -7,7 +7,7 @@
 	<title>공간 리스트</title>
 	<%@include file="../includes/header.jsp"%>  
 </head>
-<body class="bg-gradient-primary">
+<body>
 <script>
 #(document).ready(function(){
 	$("#myInput").on("keyup",function(){
