@@ -21,7 +21,7 @@ public class MainController {
    private SpaceService  sService;
    
    @RequestMapping("/")
-   public String main(Model model) {
+   public String main(Model model) throws Exception {
       
       List<SpaceVO> vo = sService.list();
       model.addAttribute("spaceVO", vo);
