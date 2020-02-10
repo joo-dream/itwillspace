@@ -44,11 +44,13 @@ public class SpaceServiceImpl implements SpaceService {
 		List<SpaceVO> list = mapper.list();
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
-			String filefullPath = attach.getUploadPath()+ 
-							"/s_"+attach.getUuid() +"_"+attach.getFileName();
-			filefullPath=filefullPath.replaceAll("\\\\","/");
-			log.info("attach file : " + filefullPath );
-			vo.setSpace_image(filefullPath);
+			if(attach!=null) {
+				String filefullPath = attach.getUploadPath()+ 
+								"/s_"+attach.getUuid() +"_"+attach.getFileName();
+				filefullPath=filefullPath.replaceAll("\\\\","/");
+				log.info("attach file : " + filefullPath );
+				vo.setSpace_image(filefullPath);
+			}
 		}
 	//yeounjoo space vo에 이미지 정보 추가 end			
 		return list;
@@ -61,11 +63,13 @@ public class SpaceServiceImpl implements SpaceService {
 		List<SpaceVO> list = mapper.myList(userId);
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
-			String filefullPath = attach.getUploadPath()+ 
-							"/s_"+attach.getUuid() +"_"+attach.getFileName();
-			filefullPath=filefullPath.replaceAll("\\\\","/");
-			log.info("attach file : " + filefullPath );
-			vo.setSpace_image(filefullPath);
+			if(attach!=null) {
+				String filefullPath = attach.getUploadPath()+ 
+								"/s_"+attach.getUuid() +"_"+attach.getFileName();
+				filefullPath=filefullPath.replaceAll("\\\\","/");
+				log.info("attach file : " + filefullPath );
+				vo.setSpace_image(filefullPath);
+			}
 		}
 	//yeounjoo space vo에 이미지 정보 추가 end			
 		return list;
@@ -91,11 +95,13 @@ public class SpaceServiceImpl implements SpaceService {
 //yeounjoo space vo에 이미지 정보 추가 start 	
 		SpaceVO vo = mapper.view(id);
 		SpaceAttachVO attach = attachMapper.findOneBySpaceId(id);
-		String filefullPath = attach.getUploadPath()+ 
-						"/s_"+attach.getUuid() +"_"+attach.getFileName();
-		filefullPath=filefullPath.replaceAll("\\\\","/");
-		log.info("attach file : " + filefullPath );
-		vo.setSpace_image(filefullPath);
+		if(attach!=null) {
+			String filefullPath = attach.getUploadPath()+ 
+							"/s_"+attach.getUuid() +"_"+attach.getFileName();
+			filefullPath=filefullPath.replaceAll("\\\\","/");
+			log.info("attach file : " + filefullPath );
+			vo.setSpace_image(filefullPath);
+		}
 //yeounjoo space vo에 이미지 정보 추가 end			
 		return vo;
 	}
@@ -127,11 +133,13 @@ public class SpaceServiceImpl implements SpaceService {
 		List<SpaceVO> list = mapper.listPage(cri);
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
-			String filefullPath = attach.getUploadPath()+ 
-							"/s_"+attach.getUuid() +"_"+attach.getFileName();
-			filefullPath=filefullPath.replaceAll("\\\\","/");
-			log.info("attach file : " + filefullPath );
-			vo.setSpace_image(filefullPath);
+			if(attach!=null) {
+				String filefullPath = attach.getUploadPath()+ 
+								"/s_"+attach.getUuid() +"_"+attach.getFileName();
+				filefullPath=filefullPath.replaceAll("\\\\","/");
+				log.info("attach file : " + filefullPath );
+				vo.setSpace_image(filefullPath);
+			}
 		}
 	//yeounjoo space vo에 이미지 정보 추가 end		
 		return list;
@@ -168,11 +176,13 @@ public class SpaceServiceImpl implements SpaceService {
 		List<SpaceVO> list = mapper.hostPage(startPost, countList);
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
-			String filefullPath = attach.getUploadPath()+ 
-							"/s_"+attach.getUuid() +"_"+attach.getFileName();
-			filefullPath=filefullPath.replaceAll("\\\\","/");
-			log.info("attach file : " + filefullPath );
-			vo.setSpace_image(filefullPath);
+			if(attach!=null) {
+				String filefullPath = attach.getUploadPath()+ 
+								"/s_"+attach.getUuid() +"_"+attach.getFileName();
+				filefullPath=filefullPath.replaceAll("\\\\","/");
+				log.info("attach file : " + filefullPath );
+				vo.setSpace_image(filefullPath);
+			}
 		}
 	//yeounjoo space vo에 이미지 정보 추가 end	
 		return list;
