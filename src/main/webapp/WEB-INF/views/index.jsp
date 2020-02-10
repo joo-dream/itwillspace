@@ -169,7 +169,7 @@
                   data-aos-delay="100" >
                   <a href="/space/detail?space_id=1" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
                      <div class="image"
-                      style="background-image: url('<spring:url value='/img/img_1.jpg' />');border-radius:5px; ">
+                      style="background-image: url('<spring:url value='/img/${spaceVO.space_image}' />');border-radius:5px; ">
                       </div>
                      <div class="unit-9-content">
                         <h2>${spaceVO.space_title}</h2>
