@@ -122,15 +122,9 @@ public class SpaceServiceImpl implements SpaceService {
 	}
 
 	@Override
-	public int count() throws Exception{
-		log.info("count....." );
-		return mapper.count();
-	}
-
-	@Override
-	public List<SpaceVO> listPage(int startPost, int countList) throws Exception {
+	public List<SpaceVO> listPage(Criteria cri) throws Exception {
 	//yeounjoo space vo에 이미지 정보 추가 start	
-		List<SpaceVO> list = mapper.listPage(startPost, countList);
+		List<SpaceVO> list = mapper.listPage(cri);
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
 			String filefullPath = attach.getUploadPath()+ 
