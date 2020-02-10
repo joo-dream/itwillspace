@@ -13,7 +13,7 @@
    <%@include file="../nav.jsp"%>  
 </head> 
 
-<body style="margin:50px auto;">
+<body style="margin:10% auto;">
 
 <div class="container-fluid" style="width:75%; margin-bottom:5%;">
    <h1 class="h2 mb-2 text-gray-800">My Page</h1>
@@ -127,7 +127,18 @@
      </p>
      <div class="card__action-bar">
        <button class="card__button"  onclick="location.href='/reservation/modify?reservationId=${reservedList.reservationId}' ">예약 수정</button>
-       <button class="card__button deleteBtn" onclick="location.href='/reservation/delete?reservationId=${reservedList.reservationId}' ">예약 취소</button>
+       <button class="card__button deleteBtn" onclick="d(event)" >예약 취소</button>
+     	
+     	<!-- 정말로 삭제? 묻는 script -->
+     	<script>
+	     function d(e){
+	    	 var result = confirm('정말 삭제하시겠습니까?'); 
+	    	 if(result) {
+		    	 location.href='/reservation/delete?reservationId=${reservedList.reservationId}';
+	    	 } else { }
+	     }
+		</script>
+		
      </div>
    </div>
    </c:forEach>
