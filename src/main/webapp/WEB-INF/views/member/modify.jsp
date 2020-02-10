@@ -7,23 +7,19 @@
 <html lang="en">
 
 <head>
-	<%@include file="../includes/header.jsp"%>  
+	<%@include file="../nav.jsp"%> 
+	<%@include file="../includes/header.jsp"%>   
 </head>  
 
-<body>
+<body style="margin:10% auto;">
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-	<!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">내 정보 수정</h1>
-	<p class="mb-4"></p>
-
-	<!-- DataTales Example -->
 	<form role="form" action="/member/modify" method="post">
 		<div class="card shadow mb-4 border border-primary" >
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">회원 정보 입력</h6>
+				<h6 class="h2 mb-2 text-gray-800">회원 정보 수정</h6>
 			</div>
 			<div class="card-body">
 		          <div class="form-group row">
@@ -90,7 +86,7 @@
 
 		<div class="card shadow mb-4 border border-primary">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">프로파일 설정</h6>
+				<h6 class="h2 mb-2 text-gray-800">프로파일 설정</h6>
 			</div>
 		    <div class="card-body">
 	          <div class="card">
