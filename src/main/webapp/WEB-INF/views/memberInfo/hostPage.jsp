@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html>
 <html lang="utf-8">
 
@@ -125,7 +126,7 @@
             data-aos-delay="100" >
             <a href="/space/view?id=${myList.space_id}"  style="border-radius:5px; margin-bottom:10%;">
                <div class="image unit-9" 
-                  style="background-image: url('${pageContext.request.contextPath}/resources/image/img_1.jpg');border-radius:5px; "></div>
+                  style="background-image: url('<spring:url value='/img/${myList.space_image}' />');border-radius:5px; "></div>
                <div class="unit-9-content-9 title"  style="margin-bottom:20%;">
                   <h3 style="margin-top:10px;"><a href="/memberInfo/resListPage?id=${myList.space_id}">${myList.space_title}</a></h3>
                   <span class="info" style="color:#a3a3a3;"> ${myList.space_address} </span>
