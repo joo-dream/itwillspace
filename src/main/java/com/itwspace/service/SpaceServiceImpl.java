@@ -40,13 +40,35 @@ public class SpaceServiceImpl implements SpaceService {
 	@Override
 	public List<SpaceVO> list() {
 		log.info("list.....");
-		return mapper.list();
+	//yeounjoo space vo에 이미지 정보 추가 start	
+		List<SpaceVO> list = mapper.list();
+		for(SpaceVO vo : list) {
+			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
+			String filefullPath = attach.getUploadPath()+ 
+							"/s_"+attach.getUuid() +"_"+attach.getFileName();
+			filefullPath=filefullPath.replaceAll("\\\\","/");
+			log.info("attach file : " + filefullPath );
+			vo.setSpace_image(filefullPath);
+		}
+	//yeounjoo space vo에 이미지 정보 추가 end			
+		return list;
 	}
 	
 	@Override
 	public List<SpaceVO> myList(String userId) {
 		log.info("myList.....");
-		return mapper.myList(userId);
+	//yeounjoo space vo에 이미지 정보 추가 start	
+		List<SpaceVO> list = mapper.myList(userId);
+		for(SpaceVO vo : list) {
+			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
+			String filefullPath = attach.getUploadPath()+ 
+							"/s_"+attach.getUuid() +"_"+attach.getFileName();
+			filefullPath=filefullPath.replaceAll("\\\\","/");
+			log.info("attach file : " + filefullPath );
+			vo.setSpace_image(filefullPath);
+		}
+	//yeounjoo space vo에 이미지 정보 추가 end			
+		return list;
 	}
 	
 	@Transactional
@@ -66,7 +88,16 @@ public class SpaceServiceImpl implements SpaceService {
 	@Override
 	public SpaceVO view(int id) throws Exception {
 		log.info("view....." + id);
-		return mapper.view(id);
+//yeounjoo space vo에 이미지 정보 추가 start 	
+		SpaceVO vo = mapper.view(id);
+		SpaceAttachVO attach = attachMapper.findOneBySpaceId(id);
+		String filefullPath = attach.getUploadPath()+ 
+						"/s_"+attach.getUuid() +"_"+attach.getFileName();
+		filefullPath=filefullPath.replaceAll("\\\\","/");
+		log.info("attach file : " + filefullPath );
+		vo.setSpace_image(filefullPath);
+//yeounjoo space vo에 이미지 정보 추가 end			
+		return vo;
 	}
 	
 	@Transactional
@@ -91,8 +122,25 @@ public class SpaceServiceImpl implements SpaceService {
 	}
 
 	@Override
-	public List<SpaceVO> listPage(Criteria cri) throws Exception {
-		return mapper.listPage(cri);
+	public int count() throws Exception{
+		log.info("count....." );
+		return mapper.count();
+	}
+
+	@Override
+	public List<SpaceVO> listPage(int startPost, int countList) throws Exception {
+	//yeounjoo space vo에 이미지 정보 추가 start	
+		List<SpaceVO> list = mapper.listPage(startPost, countList);
+		for(SpaceVO vo : list) {
+			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
+			String filefullPath = attach.getUploadPath()+ 
+							"/s_"+attach.getUuid() +"_"+attach.getFileName();
+			filefullPath=filefullPath.replaceAll("\\\\","/");
+			log.info("attach file : " + filefullPath );
+			vo.setSpace_image(filefullPath);
+		}
+	//yeounjoo space vo에 이미지 정보 추가 end		
+		return list;
 	}
 	
 	//1.29 add getAttachList(String space_id)
@@ -122,6 +170,17 @@ public class SpaceServiceImpl implements SpaceService {
 
 	@Override
 	public List<SpaceVO> hostPage(int startPost, int countList) throws Exception {
-		return mapper.hostPage(startPost, countList);
+	//yeounjoo space vo에 이미지 정보 추가 start	
+		List<SpaceVO> list = mapper.hostPage(startPost, countList);
+		for(SpaceVO vo : list) {
+			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
+			String filefullPath = attach.getUploadPath()+ 
+							"/s_"+attach.getUuid() +"_"+attach.getFileName();
+			filefullPath=filefullPath.replaceAll("\\\\","/");
+			log.info("attach file : " + filefullPath );
+			vo.setSpace_image(filefullPath);
+		}
+	//yeounjoo space vo에 이미지 정보 추가 end	
+		return list;
 	}
 }

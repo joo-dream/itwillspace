@@ -13,6 +13,8 @@ public interface SpaceAttachMapper {
 	
 	public List<SpaceAttachVO> findBySpaceId(int space_id);
 	
+	public SpaceAttachVO findOneBySpaceId(int space_id); //yeounjoo space vo에 이미지 정보 추가	
+	
 	public void deleteAll(int space_id);
 	
 	public List<SpaceAttachVO> getOldFiles();
