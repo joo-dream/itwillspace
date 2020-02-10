@@ -111,7 +111,7 @@ public class MemberController {
 		rttr.addFlashAttribute("result", "modified");
 		
 		if(vo.getAuth().equals("ROLE_MEMBER"))
-			return "redirect:/memberInfo/myPage";
+			return "redirect:/memberInfo/myPage?num=1";
 		else
 			return "redirect:/memberInfo/hostPage";	
 	}	
