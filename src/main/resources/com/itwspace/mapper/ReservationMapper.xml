@@ -27,7 +27,7 @@ order by reservationId desc
 
 <!-- 공간별 예약 리스트 출력 -->
 <select id="listBySpaceid" resultType="com.itwspace.model.ReservationVO">
-select	res_date, res_time, res_people, res_name, res_phone, res_title, space_id
+select	res_date, res_time, res_people, res_name, res_phone, res_title, space_id, res_tstamp
 from	reservation
 where	space_id = #{space_id}
 order by reservationId desc	

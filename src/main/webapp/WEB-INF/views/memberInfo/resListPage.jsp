@@ -3,22 +3,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <%@include file="../nav.jsp"%>	
 </head>
 <body>
 
 <!-- 예약리스트 -->
-
-
-<div class=""resList-box" style="margin-top:80px;">
-<h2 style="margin-left:50px;"> 예약 현황</h2>
-
-<div class="container">	
-	
-	<table id="myTable" class="table table-bordered table-striped table-hover">
-		<thead>
-			<tr class="info">	
+<div class="container resList-box" style="margin-top:120px;">
+  <h2>공간 예약 현황</h2> <br>
+  <table class="table table-hover">
+    <thead class="thead-dark">
+			<tr align="center">	
 				<th>예약자</th>	
 				<th>연락처</th>	
 				<th>예약일</th>
@@ -28,8 +28,7 @@
 			</tr>
 		</thead>		
 		
-		<tbody>
-		
+		<tbody>		
 		<c:forEach items="${listBySpaceid}" var="listBySpaceid">
 			<tr align="center">
 				<td>${listBySpaceid.res_name}</td>
@@ -42,12 +41,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
-</div>
-
 
 </div>
-
-
-
 </body>
 </html>
