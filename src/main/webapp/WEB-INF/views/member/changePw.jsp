@@ -9,9 +9,10 @@
 	<%@include file="../includes/header.jsp"%>  
 </head>  
 
-<body class="bg-gradient-primary">
+<body style="background-image: url('/resources/image/hero_bg_2.jpg'); 
+  		background-repeat: no-repeat; background-position: center center; background-size:cover;">
 
-  <div class="container">
+  <div class="container-fluid">
 
     <!-- Outer Row -->
     <div class="row justify-content-center">
