@@ -127,17 +127,20 @@
      </p>
      <div class="card__action-bar">
        <button class="card__button"  onclick="location.href='/reservation/modify?reservationId=${reservedList.reservationId}' ">예약 수정</button>
-       <button class="card__button deleteBtn" onclick="d(event)" >예약 취소</button>
+       <button class="card__button deleteBtn" onclick="location.href='/reservation/delete?reservationId=${reservedList.reservationId}'" >예약 취소</button>
      	
-     	<!-- 정말로 삭제? 묻는 script -->
+     	<!-- 정말로 삭제? 묻는 script
      	<script>
 	     function d(e){
+	    	 var redId = '<c:out value="${reservedList.reservationId}"/>';
+
+		     alert(redId);
 	    	 var result = confirm('정말 삭제하시겠습니까?'); 
 	    	 if(result) {
-		    	 location.href='/reservation/delete?reservationId=${reservedList.reservationId}';
+		   		 location.href='/reservation/delete?reservationId=${reservedList.reservationId}';
 	    	 } else { }
 	     }
-		</script>
+		</script>-->
 		
      </div>
    </div>

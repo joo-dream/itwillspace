@@ -104,7 +104,7 @@
 </div>
 
 <div class="btnBox" style="margin-top: 50px;">
-    <a href="../memberInfo/myPage">
+    <a href="../memberInfo/myPage?num=1">
         <input type='button' class="btn btn-primary btn-user btn-block" value="My Page로 이동">
     </a>
     <a href="../space/list">
