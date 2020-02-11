@@ -15,6 +15,10 @@
 	select * from space_profile where space_id = #{space_id}
 </select>
 
+<select id="findOneBySpaceId" resultType="com.itwspace.model.SpaceAttachVO">
+	select * from space_profile where space_id = #{space_id} limit 1
+</select>
+
 <delete id="deleteAll">
 	delete from space_profile where space_id = #{space_id}
 </delete>

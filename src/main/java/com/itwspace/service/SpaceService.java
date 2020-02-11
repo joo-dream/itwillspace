@@ -14,13 +14,15 @@ public interface SpaceService {
 
 	public List<SpaceVO> list() throws Exception; 
 	
-	public List<SpaceVO> myList(String userId);
+	List<SpaceVO> myList(Criteria cri, String userId) throws Exception;
 
 	public void modify(SpaceVO vo) throws Exception;
 
 	public void delete(int id) throws Exception;
 
 	public int getTotalCount(Criteria cri) throws Exception;
+	
+	public int getMyTotalCount(Criteria cri, String userId) throws Exception;
 
 	public List<SpaceVO> listPage(Criteria cri) throws Exception;
 

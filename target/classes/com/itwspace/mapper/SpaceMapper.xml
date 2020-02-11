@@ -9,11 +9,45 @@
         select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate from space
 </select>
 
-<select id="myList" resultType="com.itwspace.model.SpaceVO"> <!-- 20.01.22 경로문제 mylist 해결 -->
-		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate 
-		from space where userId = #{userId}
+<!-- hostPage 페이징 및 검색 쿼리 -->
+<sql id="mySearchCondition">
+	<if test="cri.searchType != null">
+		<if test="cri.searchType == 'title'.toString()">
+			and space_title like concat('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'type'.toString()">
+			and space_kind like concat('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'address'.toString()">
+			and space_address like concat('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'all'.toString()">
+			and (space_title like concat('%', #{cri.keyword}, '%')
+				or space_kind like concat('%', #{cri.keyword}, '%')
+				or space_address like concat('%', #{cri.keyword}, '%'))
+		</if>
+	</if>
+</sql>
+
+<select id="myList" parameterType="map" resultType="com.itwspace.model.SpaceVO">
+		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
+		from space
+		where userId = #{userId}
+		<include refid="mySearchCondition"></include>
+		order by space_id desc
+		limit #{cri.pageStart}, #{cri.perPageNum}
 </select>
 
+<select id="getMyTotalCount" resultType="int">
+      	select count(space_id) from space
+      	where userId = #{userId}
+		<include refid="mySearchCondition"></include>
+      
+</select>
+
+<!-- End - hostPage 페이징 및 검색 쿼리 -->
+
+<!-- listPage 페이징 및 검색 쿼리 -->
 <sql id="searchCondition">
 	<if test="searchType != null">
 		<if test="searchType == 'title'.toString()">
@@ -33,7 +67,8 @@
 	</if>
 </sql>
 
-<select id="listPage" resultType="com.itwspace.model.SpaceVO">
+
+<select id="listPage" parameterType="map" resultType="com.itwspace.model.SpaceVO">
 		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
 		from space 
 		<include refid="searchCondition"></include>
@@ -46,6 +81,8 @@
 		<include refid="searchCondition"></include>
       
 </select>
+
+<!-- End - listPage 페이징 및 검색 쿼리 -->
 
 <insert id="write" parameterType="com.itwspace.model.SpaceVO" useGeneratedKeys="true" keyProperty="space_id">
 	 	insert into space(space_id, userId, space_kind, space_title, space_price, space_address, space_content, space_account)

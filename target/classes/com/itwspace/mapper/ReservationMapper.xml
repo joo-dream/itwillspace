@@ -5,32 +5,40 @@
 	
 <mapper namespace="com.itwspace.mapper.ReservationMapper">
 
-<!-- 예약 정보 입력 
+<!-- 예약 정보 입력 -->
 <insert id="insert">
-insert into reservation(res_name, res_phone, res_people, res_date, res_time, userId) 
-values(#{res_name}, #{res_phone}, #{res_people}, #{res_date}, #{res_time}, #{userId})
-</insert>
--->
-
-<!-- 달력 고칠때까지 res_date 뺄게여~~ -->
-<insert id="insert">
-insert into reservation(res_name, res_phone, res_people, res_time, userId) 
-values(#{res_name}, #{res_phone}, #{res_people}, #{res_time}, #{userId})
+insert into reservation(space_id, res_account, res_name, res_phone, res_people, res_date, res_time, userId, res_title) 
+values(#{space_id}, #{res_account}, #{res_name}, #{res_phone}, #{res_people}, #{res_date}, #{res_time}, #{userId}, #{res_title})
 </insert>
 
 <!-- 예약 정보 확인-->
 <select id="view" parameterType="int" resultType="com.itwspace.model.ReservationVO">
-select  res_date, res_people, res_time, res_name, res_phone, res_tstamp, reservationId
-from	reservation
+select  * from	reservation
 where	reservationId = #{reservationId}
 </select> 
 
 <!-- 예약 리스트 출력 -->
 <select id="reservedList" parameterType="String" resultType="com.itwspace.model.ReservationVO">
-select	reservationId, res_date, res_time, res_people, res_tstamp, res_name, res_phone
-from	reservation
+select res_name, res_phone, res_date, res_time, res_people, res_tstamp, res_title, res_price, res_account
+from reservation
 where	userId = #{userId}
 order by reservationId desc	
+</select> 
+
+<!-- 공간별 예약 리스트 출력 -->
+<select id="listBySpaceid" resultType="com.itwspace.model.ReservationVO">
+select	res_date, res_time, res_people, res_name, res_phone, res_title, space_id, res_tstamp
+from	reservation
+where	space_id = #{space_id}
+order by reservationId desc	
+</select> 
+
+<!-- 달력에 필요한 space 정보 출력 -->
+<select id="reservedListBySpace" parameterType="int" resultType="com.itwspace.model.ReservationVO">
+select  res_date, res_time, reservationId, space_id, res_tstamp
+from	reservation
+where	space_id = #{space_id}
+order by res_tstamp desc
 </select> 
 
 <update id="update">
@@ -46,6 +54,23 @@ update reservation set
 <delete id="delete">
 	delete from reservation where reservationId = #{reservationId}
 </delete>
+
+<!-- 게시물의 총 개수 -->
+<select id="count" resultType="int">
+select	count(userId) 
+from	reservation
+where   userId = #{userId}
+</select>
+	
+<!-- 게시물 목록(페이징) : 매개변수(시작위치, 개수)-->
+<!-- 게시물을 displayPost위치에서 postNum개수만큼 찾는다. -->
+<select id="listPage" resultType="com.itwspace.model.ReservationVO">
+select	* from	reservation
+where   userId = #{userId}
+order by reservationId desc
+	limit #{displayPost}, #{postNum}
+</select>
+
 </mapper>
 
 
