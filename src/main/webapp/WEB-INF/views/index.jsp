@@ -60,7 +60,7 @@
 
    <div class="site-wrap">
    
-   <!-- NAVBAR -->
+<!-- NAVBAR -->
       <div class="site-navbar start-header start-style">
          <div class="container py-1">
             <div class="row align-items-center">
@@ -80,51 +80,42 @@
                      </div>
 
                      <ul class="site-menu js-clone-nav d-none d-lg-block">
-                        <li class="active"><a href="/">Home</a></li>
-                        <li class="has-children"><a href="/space/listPage?page=1">space
-                              List</a>
+                        <li class="active"><a href="/">HOME</a></li>
+                       
+                        <li class="has-children text-white">SPACE
                            <ul class="dropdown arrow-top">
-                              <li><a href="#">Party Room</a></li>
-                              <li><a href="#">Semina Room</a></li>
-                              <li><a href="#">Pratice Room</a></li>
-                              <li class="has-children"><a
-                                 href="/space/detail?space_id=1">방 상세정보보기</a>
-                                 <ul class="dropdown">
-                                    <li><a href="/space/write">space 등록</a></li>
-                                    <li><a href="/space/room_detail_all">상세방정보 예시</a></li>
-                                    <li><a href="#">Menu Three</a></li>
-                                 </ul></li>
+                              <li><a href="/space/listPage?page=1">SPACE LIST</a></li>
+                              <li><a href="/space/write">SPACE ENROLL</a></li>                                 
                            </ul></li>
-                        <li><a href="/memberInfo/myPage?num=1">마이페이지</a></li>
-                        <li><a href="/memberInfo/hostPage">host페이지</a></li>
-                        
+                           
+                        <li class="has-children text-white">MY PAGE
+                           <ul class="dropdown arrow-top">   
+                              <li><a href="/memberInfo/myPage?num=1">USER PAGE</a></li>
+                              <li><a href="/memberInfo/hostPage">HOST PAGE</a></li>
+                           </ul></li>
                         <li>
                         <sec:authorize access="isAnonymous()">
-                          <a href="/member/login">로그인</a>
+                          <a href="/member/login">LOGIN</a>
                         </sec:authorize>
                         <sec:authorize access="isAuthenticated()">
                            
-                                 <form action="/logout" method="POST">
-                                 
-                                  <button class="navBtn" type="submit"
-                                  style="background-color: rgba(255, 255, 255, 0); border:0px;
-                                  padding: 10px 10px; text-decoration: none !important; color: rgba(255, 255, 255, 0.6);"
-                                  >
-                                  로그아웃</button>
+                                 <form action="/logout" method="POST">                                 
+                                 <button class="navBtn" type="submit"
+                                     style="background-color: rgba(255, 255, 255, 0); border:0px;
+                                        padding: 10px 10px; text-decoration: none !important; color: rgba(255, 255, 255, 0.6);">
+                                 LOGOUT</button>
                                </form>  
                             
                         </sec:authorize>
                         </li>
                         
                      </ul>
-                  </nav >
+                  </nav>
                </div>
-
-
             </div>
          </div>
    </div>
-   <!-- end of NAVBAR -->
+   <!-- end of NAVBAR -->  
    <div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
          <div class="site-mobile-menu-close mt-3">
@@ -188,7 +179,7 @@
       </div>
    </div>
 
-   <!-- 팀원소개 container -->
+   <!-- 팀원소개 container 
    <div class="container">
       <div class="row">
          <div class="col-lg-8">
@@ -216,15 +207,15 @@
             </div>
          </div>
       </div>
-   </div>
+   </div>-->
    
    <!-- footer -->
    <footer class="site-footer">
       <div class="container">
-         <div class="row pt-5 mt-5 text-center">
+         <div class="row pt-5 text-center">
             <div class="col-md-12">
-               <p></p>
-               <p>
+               <p></p><br>
+               <p style="position:absolute; bottom:-350%; left:26%;">
                   Copyright &copy;
                   <script>
                      document.write(new Date().getFullYear());
@@ -244,7 +235,6 @@
    <script src="<c:url value="/resources/js/jquery-ui.js" />"></script>
    <script src="<c:url value="/resources/js/popper.min.js" />"></script>
    <script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>
-   <script src="<c:url value="/resources/js/owl.carousel.min.js" />"></script>
    <script src="<c:url value="/resources/js/jquery.stellar.min.js" />"></script>
    <script src="<c:url value="/resources/js/jquery.countdown.min.js" />"></script>
    <script
