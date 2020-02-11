@@ -2,11 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
+<header>
 	<meta charset="UTF-8">
 	<title>예약 정보 확인</title>
-	<script src="https://kit.fontawesome.com/aeb2899479.js" crossorigin="anonymous"></script>
-</head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/aeb2899479.js" crossorigin="anonymous"></script>
+<script src="<c:url value="/resources/js/moment.js" />"></script>
+
+ <%@include file="../nav.jsp"%>
+</header>
 <style>
     body {
         margin:50px auto;
@@ -66,7 +72,7 @@
     }
     
 </style>
-<body>
+<body style="margin:10% auto;">
 
 <div class="res_alert" style="margin-bottom: 50px;">
     <i class="fas fa-check-circle"></i><br>
@@ -86,8 +92,9 @@
     <div>
        <br>
         <strong><i class="fas fa-user-secret"></i>&nbsp;호스트 정보</strong>
-        <p>호스트 연락처 : </p>
-        <p>호스트 계좌번호 : </p>
+        <p>호스트 공간 이름 : ${spaceVO .space_title}</p>
+        <p>호스트 공간 주소 : ${spaceVO .space_address}</p>
+        <p>호스트 계좌번호 : ${spaceVO .space_account}</p>
         <br>
     </div>
     
@@ -103,14 +110,11 @@
     </div>
 </div>
 
-<div class="btnBox" style="margin-top: 50px;">
+<div class="btnBox" style="margin-top: 50px; width:12%; margin-botton:10%;">
     <a href="../memberInfo/myPage?num=1">
         <input type='button' class="btn btn-primary btn-user btn-block" value="My Page로 이동">
     </a>
-    <a href="../space/list">
-        <input type="button" class="btn btn-primary btn-user btn-block" value="방 리스트로 이동">
-    </a>	
-    
+   
 </div>
 
 
