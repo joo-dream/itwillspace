@@ -21,6 +21,8 @@ public interface SpaceMapper {
 	public SpaceVO view(int id);
 
 	public int getTotalCount(Criteria cri);
+	
+	public int getMyTotalCount(@Param("cri") Criteria cri, @Param("userId") String userId);
 
 	public List<SpaceVO> listPage(Criteria cri);
 
@@ -28,7 +30,9 @@ public interface SpaceMapper {
 
 	public List<SpaceVO> list();
 	
-	public List<SpaceVO> myList(String userId); //20.01.22 경로문제로 인한 문제해결
+//	public List<SpaceVO> myList(String userId); //20.01.22 경로문제로 인한 문제해결
+	
+	public List<SpaceVO> myList(@Param("cri") Criteria cri, @Param("userId") String userId);
 
 	public void deleteAll(String space_id);
 

@@ -57,10 +57,10 @@ public class SpaceServiceImpl implements SpaceService {
 	}
 	
 	@Override
-	public List<SpaceVO> myList(String userId) {
+	public List<SpaceVO> myList(Criteria cri, String userId) {
 		log.info("myList.....");
 	//yeounjoo space vo에 이미지 정보 추가 start	
-		List<SpaceVO> list = mapper.myList(userId);
+		List<SpaceVO> list = mapper.myList(cri, userId);
 		for(SpaceVO vo : list) {
 			SpaceAttachVO attach = attachMapper.findOneBySpaceId(vo.getSpace_id());
 			if(attach!=null) {
@@ -126,6 +126,13 @@ public class SpaceServiceImpl implements SpaceService {
 		log.info("count…..");
 		return mapper.getTotalCount(cri);
 	}
+	
+	@Override
+	public int getMyTotalCount(Criteria cri, String userId) throws Exception {
+		log.info("count.....");
+		return mapper.getMyTotalCount(cri, userId);
+	}
+	
 
 	@Override
 	public List<SpaceVO> listPage(Criteria cri) throws Exception {
