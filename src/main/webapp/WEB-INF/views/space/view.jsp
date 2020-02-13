@@ -85,12 +85,14 @@
    		<c:set var="spaceUserId" value="${view.userId}"/>
    		<c:if test="${pUserId eq spaceUserId }">
    		<div>
-			<a href="/space/modify?id=${view.space_id }">게시물 수정</a> 
-			<a href="/space/delete?id=${view.space_id }">게시물 삭제</a>
+			<a href="/space/modify?id=${view.space_id }" class="btn btn-warning btn-sm">게시물 수정</a> 
+			<a href="/space/delete?id=${view.space_id }" class="btn btn-danger btn-sm">게시물 삭제</a>
 		</div>
 	</c:if>
 	</sec:authorize>
-
+	<br>
+	<a href="/reservation/booking?space_id=${view.space_id}" class="btn btn-primary">예약하기</a>
+	
 	</div>
 
 	<div id="map" style="width: 500px; height: 400px; margin: 50px"></div>
