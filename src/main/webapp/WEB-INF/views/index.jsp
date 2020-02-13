@@ -158,7 +158,7 @@
             <c:forEach items="${spaceVO}" var="spaceVO" begin="0" end="8">
                <div class="col-lg-4" data-aos="fade-up"
                   data-aos-delay="100" >
-                  <a href="/space/detail?space_id=1" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
+                  <a href="/space/view?id=${spaceVO.space_id}" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
                      <div class="image"
                       style="background-image: url('<spring:url value='/img/${spaceVO.space_image}' />');border-radius:5px; ">
                       </div>
