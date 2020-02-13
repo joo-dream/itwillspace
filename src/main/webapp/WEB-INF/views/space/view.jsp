@@ -7,13 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>공간 조회</title>
+	<link rel="stylesheet" type="text/css"
+	   href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+	<link rel="stylesheet" type="text/css"
+	   href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css"
+	   href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" type="text/css"
+	   href="${pageContext.request.contextPath}/resources/css/aos.css">
+	<link rel="stylesheet" type="text/css"
+	   href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <%@include file="../includes/header.jsp"%>
+<%@include file="../nav.jsp" %>
 </head>
-<body style="margin: 0 auto; width: 80%;">
+<body style="margin: 150px; ">
 
-	<br><br><br>
-
-	<div class="container">
+	<div class="container" style="position:relative;">
 	
 		<h2>공간 내용</h2>
 		<hr>

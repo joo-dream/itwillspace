@@ -7,9 +7,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>공간 정보 수정</title>
+	
+	<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+	<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+	<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/aos.css">
+	<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/style.css">
+	
 	<%@ include file="../includes/header.jsp" %>
+	<%@ include file="../nav.jsp" %>
 </head>
-<body>
+
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {
@@ -54,19 +67,10 @@ function daumZipCode() {
 }
 </script>
 
-<br><br><br>
-
-<div class="container">
+<body style="margin:150px;">
+<div class="container" style="position:relative;">
 		
 	<!-- framework -->
-	<div class="row justify-content-center">
-	<div class="col-xl-6 col-lg-12 col-md-9">
-	<div class="card o-hidden border-0 shadow-lg my-g">
-	<div class="card-body p-0">
-		
-	<div class="row">
-	<div class="col-lg-12">
-	<div class="p-5">
 	<div class="text-center">
 		<h2 class="h4 text-gray-900 mb-4">공간정보 수정</h2>
 	</div>
@@ -87,13 +91,21 @@ function daumZipCode() {
 					<option value="연습">연습</option>
 				</select>
 			</tr>	
-			<tr>
-				<label>방가격</label> 
-				<select name="space_price" class="form-control">
-					<option value="6시간:50000" selected>6시간:50000</option>
-					<option value="종일:150000">종일:150000</option>
-				</select>
-			</tr>
+			<label>가격</label>
+			<div class="form-control">
+			
+	           	<div class="mt-1 col-sm-14">
+	               	<div class="ml-5 custom-control custom-radio custom-control-inline">
+  						<input type="radio" id="customRadioInline1" name="space_price" class="custom-control-input" value="quater_price" checked>
+  						<label class="custom-control-label" for="customRadioInline1">6시간</label>
+					</div>
+					<div class="ml-5 custom-control custom-radio custom-control-inline">
+  						<input type="radio" id="customRadioInline2" name="space_price" class="custom-control-input" value="a_price">
+  						<label class="custom-control-label" for="customRadioInline2">종일</label>
+					</div>
+	            </div>
+	        </div>
+			<br>
 			<tr>
 				<th width="50" height="50" class="form-control">방주소</th>
 				<td>
@@ -130,15 +142,6 @@ function daumZipCode() {
 <!-- 방 사진 등록 yeounjoo end-->	     
 		<button type="submit">수정</button>	
 	</form>
-	
-	</div>
-	</div>
-	</div>
-	
-	</div>
-	</div>
-	</div>
-	</div>
 </div>
 <!-- 방 사진 보여주기/수정 yeounjoo start-->
 <script>
