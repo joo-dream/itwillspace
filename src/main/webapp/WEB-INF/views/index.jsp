@@ -164,7 +164,7 @@
                       </div>
                      <div class="unit-9-content">
                         <h2>${spaceVO.space_title}</h2>
-                        <span> ${spaceVO.space_price} </span>
+                        <span> ${spaceVO.space_priceType}&nbsp;${spaceVO.space_price} </span>
                      </div>
                   </a>
                </div>

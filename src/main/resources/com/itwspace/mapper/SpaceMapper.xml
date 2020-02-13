@@ -6,7 +6,7 @@
 <mapper namespace="com.itwspace.mapper.SpaceMapper">
 
 <select id="list" resultType="com.itwspace.model.SpaceVO">
-        select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate from space
+        select space_id, space_title, space_kind, space_priceType, space_price, space_address, space_content, space_account, space_regDate from space
 </select>
 
 <!-- hostPage 페이징 및 검색 쿼리 -->
@@ -30,7 +30,7 @@
 </sql>
 
 <select id="myList" parameterType="map" resultType="com.itwspace.model.SpaceVO">
-		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
+		select space_id, userId, space_title, space_kind, space_priceType, space_price, space_address, space_content, space_account 
 		from space
 		where userId = #{userId}
 		<include refid="mySearchCondition"></include>
@@ -69,7 +69,7 @@
 
 
 <select id="listPage" parameterType="map" resultType="com.itwspace.model.SpaceVO">
-		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account 
+		select space_id, userId, space_title, space_kind, space_priceType, space_price, space_address, space_content, space_account 
 		from space 
 		<include refid="searchCondition"></include>
 		order by space_id desc
@@ -85,8 +85,8 @@
 <!-- End - listPage 페이징 및 검색 쿼리 -->
 
 <insert id="write" parameterType="com.itwspace.model.SpaceVO" useGeneratedKeys="true" keyProperty="space_id">
-	 	insert into space(space_id, userId, space_kind, space_title, space_price, space_address, space_content, space_account)
-		values(#{space_id}, #{userId}, #{space_kind}, #{space_title}, #{space_price}, #{space_address},
+	 	insert into space(space_id, userId, space_kind, space_title, space_priceType, space_price, space_address, space_content, space_account)
+		values(#{space_id}, #{userId}, #{space_kind}, #{space_title}, #{space_priceType}, #{space_price}, #{space_address},
 		#{space_content}, #{space_account})
 </insert>
 
@@ -95,11 +95,11 @@
 </select>
 	
 <select id="view" parameterType="int" resultType="com.itwspace.model.SpaceVO">
-		select space_id, userId, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate from space where space_id=#{space_id}
+		select space_id, userId, space_title, space_kind, space_priceType, space_price, space_address, space_content, space_account, space_regDate from space where space_id=#{space_id}
 </select>
 
 <update id="modify" parameterType="com.itwspace.model.SpaceVO">
-		update space set space_title=#{space_title}, space_kind=#{space_kind}, space_price=#{space_price}, space_address=#{space_address}, space_content=#{space_content}, space_account=#{space_account} where space_id=#{space_id}
+		update space set space_title=#{space_title}, space_kind=#{space_kind}, space_priceType=#{space_priceType}, space_price=#{space_price}, space_address=#{space_address}, space_content=#{space_content}, space_account=#{space_account} where space_id=#{space_id}
 </update>
 
 <delete id="delete" parameterType="int">
@@ -107,7 +107,7 @@
 </delete>
 
 <select id="hostPage" resultType="com.itwspace.model.SpaceVO">
-		select space_id, space_title, space_kind, space_price, space_address, space_content, space_account, space_regDate
+		select space_id, space_title, space_kind, space_priceType, space_price, space_address, space_content, space_account, space_regDate
 		from space
 		order by space_id desc
 		limit #{startPost}, #{countList}

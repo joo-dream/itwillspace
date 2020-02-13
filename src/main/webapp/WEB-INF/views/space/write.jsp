@@ -10,7 +10,20 @@
 <head>
 <meta charset="UTF-8">
 <title>공간 정보 작성</title>
+
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/aos.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <%@include file="../includes/header.jsp"%>
+<%@include file="../nav.jsp" %>
 
 </head>
 <body>
@@ -61,96 +74,93 @@
 		}
 	</script>
 
-	<div class="container">
-		<!-- framework -->
-		<div class="row justify-content-center">
-		<div class="col-xl-6 col-lg-12 col-md-9">
-		<div class="card o-hidden border-0 shadow-lg my-g">
-		<div class="card-body p-0">
-		
-		<div class="row">
-		<div class="col-lg-12">
-		<div class="p-5">
-		<div class="text-center">
-			<h2 class="h4 text-gray-900 mb-4">공간정보 작성</h2>
-		</div>
+<body style="margin:150px;">
+<div class="container" style="position: relative;">
+   <!-- framework -->
+   
+   <div class="text-center">
+      <h2 class="h4 text-gray-900 mb-4">공간정보 작성</h2>
+   </div>
 
-		<form role="form" method="post">
-			<sec:authentication property="principal.username" var="pUserId" />
-			<input type="hidden" name='userId' value="${pUserId}">
-			<table>
-				<tr>
-					<th width="50" height="50" class="form-control">공간명</th>
-					<td><input type="text" name="space_title"
-						value="${view.title}" /></td>
-				</tr>
-				<tr>
-					<label>타입</label>
-					<select name="space_kind" class="form-control">
-						<option value="파티" selected>파티</option>
-						<option value="회의">회의</option>
-						<option value="연습">연습</option>
-					</select>
-				</tr>
-				<!--
-			<th width="50" height="50">공간타입</th>
-			<td><input type="text" name="space_kind" value="${view.kind}"/></td>
-			-->
-				<!--  
-			<tr>
-				<th width="50" height="50" class="form-control">작성자</th>
-				<td><input type="text" name="space_writer" value="${view.writer}"/></td>
-			</tr>
-			-->
-				<tr>
-					<label>가격</label>
-					<select name="space_price" class="form-control">
-						<option value="6시간:50000" selected>6시간:50000</option>
-						<option value="종일:150000">종일:150000</option>
-					</select>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">방주소</th>
-					<td><input type="text" name="space_address"
-						value="${view.address}" /> <input type="button"
-						onclick="daumZipCode()" value="주소 검색"></td>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">공간상세내용</th>
-					<td><textarea cols="80" rows="10" name="space_content">${view.content}</textarea></td>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">공간결제계좌</th>
-					<td><input type="text" name="space_account"
-						value="${view.account }" /></td>
-				</tr>
-				<div class="card shadow mb-4 border border-primary">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6>
-					</div>
-			        <div class="card-body">
-			            <input multiple="multiple" type="file" name='uploadFile'
-												accept="image/*">
-					    <div class='uploadResult'> 
-				          <ul class="d-flex flex-wrap">
-				          
-				          </ul>
-			        	</div>							
-			        </div>					
-				</div>
+   <form role="form" method="post">
+      <sec:authentication property="principal.username" var="pUserId" />
+      <input type="hidden" name='userId' value="${pUserId}">
+      <table>
+         <tr>
+            <th width="50" height="50" class="form-control">공간명</th>
+            <td><input type="text" name="space_title"
+               value="${view.title}" /></td>
+         </tr>
+         <tr>
+            <label>타입</label>
+            <select name="space_kind" class="form-control">
+               <option value="파티룸" selected>파티룸</option>
+               <option value="회의실">회의실</option>
+               <option value="연습실">연습실</option>
+            </select>
+         </tr>
+            <!--
+         <th width="50" height="50">공간타입</th>
+         <td><input type="text" name="space_kind" value="${view.kind}"/></td>
+         -->
+            <!--  
+         <tr>
+            <th width="50" height="50" class="form-control">작성자</th>
+            <td><input type="text" name="space_writer" value="${view.writer}"/></td>
+         </tr>
+         -->
+         
+         <label>가격</label>
+         <div class="form-control">
+         
+                 <div class="mt-1 col-sm-14">
+                     <div class="ml-5 custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="space_priceType" class="custom-control-input" value="6시간" checked>
+                    <label class="custom-control-label" for="customRadioInline1">6시간</label>
+               </div>
+               <div class="ml-5 custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="space_priceType" class="custom-control-input" value="종일">
+                    <label class="custom-control-label" for="customRadioInline2">종일</label>
+               </div>
+               </div>
+               <input type="text" name="space_price">원
+           </div>
+         <br>
+         <tr>
+            <th width="50" height="50" class="form-control">방주소</th>
+            <td><input type="text" name="space_address"
+               value="${view.address}" /> <input type="button"
+               onclick="daumZipCode()" value="주소 검색"></td>
+         </tr>
+         <tr>
+            <th width="50" height="50" class="form-control">공간상세내용</th>
+            <td><textarea cols="80" rows="10" name="space_content">${view.content}</textarea></td>
+         </tr>
+         <tr>
+            <th width="50" height="50" class="form-control">공간결제계좌</th>
+            <td><input type="text" name="space_account"
+               value="${view.account }" /></td>
+         </tr>
+         <div class="card shadow mb-4 border border-primary">
+            <div class="card-header py-3">
+               <h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6>
+            </div>
+              <div class="card-body">
+                  <input multiple="multiple" type="file" name='uploadFile' accept="image/*">
+                <div class='uploadResult'> 
+                   <ul class="d-flex flex-wrap">
+                   
+                   </ul>
+                 </div>                     
+              </div>               
+         </div>
 
-			</table>
-			<button type="submit">작성</button>
-		</form>
-		
-		</div>
-		</div>
-		</div>
-	
-	</div>
-	</div>
-	</div>
-	</div>
+      </table>
+      <br><br>
+      <button type="submit" class="btn btn-primary btn-lg">작성</button>
+      <button class="btn btn-danger btn-lg"><a href="/memberInfo/hostPage">취소</a></button>
+   </form>
+      
 </div>
 <script>
 	$(document).ready(function(e) {

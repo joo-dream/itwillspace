@@ -11,7 +11,8 @@ public class SpaceVO {
 	private String userId;
 	private String space_kind;
 	private String space_title;
-	private String space_price;
+	private String space_priceType;
+	private int space_price;
 	private String space_address;
 	private String space_image; //array_list
 	private String space_content;

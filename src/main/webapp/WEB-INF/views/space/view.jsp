@@ -7,7 +7,19 @@
 <head>
 <meta charset="UTF-8">
 <title>공간 조회</title>
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/aos.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <%@include file="../includes/header.jsp"%>
+<%@include file="../nav.jsp" %>
 </head>
 <body style="margin: 0 auto; width: 80%;">
 
@@ -48,7 +60,7 @@
 			</tr>
 			<tr>
 				<th>가 격</th>
-				<td>${view.space_price}</td>
+				<td>${view.space_priceType} &nbsp;${view.space_price}&nbsp;원</td>
 			</tr>
 			<tr>
 				<th>주 소</th>
