@@ -81,13 +81,13 @@ public class SpaceController {
 		service.modify(vo);
 		
 		log.info("postview...."+vo);
-		return "redirect:/space/list";
+		return "redirect:/space/listPage";
 	}
 	
 	@RequestMapping(value="/delete", method=RequestMethod.GET)
 	public String getDelete(@RequestParam("id") int id)throws Exception{
 		service.delete(id);
-		return "redirect:/space/list";
+		return "redirect:/space/listPage";
 	}
 	
 	@RequestMapping(value="/listPage", method=RequestMethod.GET)
