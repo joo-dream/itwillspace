@@ -141,7 +141,7 @@ function daumZipCode() {
            </div>
        </div>   
 <!-- 방 사진 등록 yeounjoo end-->        
-      <button type="submit" class="btn btn-primary btn-lg">수정</button>
+      <button id="spaceModify" type="submit" class="btn btn-primary btn-lg">수정</button>
       <button class="btn btn-danger btn-lg"><a href="/memberInfo/hostPage">취소</a></button>
    </form>
 </div>
@@ -174,7 +174,7 @@ $(document).ready(function(){
    var formObj = $("form[role='form']");
    
    //submit
-   $("button[type='submit']").on("click", function(e){
+   $("#spaceModify").on("click", function(e){
       
       e.preventDefault();            
                  

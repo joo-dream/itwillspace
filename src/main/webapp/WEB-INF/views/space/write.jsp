@@ -157,7 +157,7 @@
 
       </table>
       <br><br>
-      <button type="submit" class="btn btn-primary btn-lg">작성</button>
+      <button id="spaceWrite" type="submit" class="btn btn-primary btn-lg">작성</button>
       <button class="btn btn-danger btn-lg"><a href="/memberInfo/hostPage">취소</a></button>
    </form>
       
@@ -167,7 +167,7 @@
 		var formObj = $("form[role='form']");
 		
 		//submit
-		$("button[type='submit']").on("click", function(e){
+		$("#spaceWrite").on("click", function(e){
 		   
 			e.preventDefault();				
 			    	    
