@@ -117,7 +117,7 @@ function daumZipCode() {
          
          <tr>
             <th width="50" height="50" class="form-control">공간상세내용</th>
-            <td><textarea cols="80" rows="10" name="space_content">${view.space_content}</textarea></td>
+            <td><textarea cols="80" rows="10" name="space_content" id="space_content">${view.space_content}</textarea></td>
          </tr>
          <tr>
             <th width="50" height="50" class="form-control">공간결제계좌</th>
@@ -176,7 +176,9 @@ $(document).ready(function(){
    //submit
    $("#spaceModify").on("click", function(e){
       
-      e.preventDefault();            
+      e.preventDefault();
+      if(checkFormData()==false) //form input이 입력되었는지, 올바른지 확인
+	        return;  		            
                  
       var str = "";   
       $(".uploadResult ul li").each(function(i, obj){
@@ -290,7 +292,41 @@ $(document).ready(function(){
                targetLi.remove();
             }
          }); //$.ajax
-   });  
+   });
+  	// 작성 후 등록 클릭시 유효성검사
+  	function checkFormData() {
+  		var space_title = $("input[name='space_title']").val();
+  		var space_price = $("input[name='space_price']").val();
+  		var space_address = $("input[name='space_address']").val();
+  		var space_content = $("#space_content").val();
+  		var space_account = $("input[name='space_account']").val();
+
+  		if(space_title == null || space_title == ''){
+  			alert("공간명을 입력해야 합니다.");
+  			return false;
+  		}
+  					
+  		if(space_price == null || space_price == ''){
+  			alert("공간의 가격을 입력해야 합니다.");
+  			return false;
+  		}
+  					
+  		if(space_address == null || space_address == ''){
+  			alert("공간의 주소를 입력해야 합니다. 주소검색 버튼을 이용하여 입력해주세요!");
+  			return false;
+  		}
+  					
+  		if(space_content == null || space_content == ''){
+  			alert("공간의 상세내용을 입력해야 합니다.");
+  			return false;
+  		}
+  					
+  		if(space_account == null || space_account == ''){
+  			alert("결제 계좌번호를 입력해주세요.");
+  			return false;
+  		}
+
+  	};
 });
 </script> 
 <!-- 방 사진 보여주기/수정 yeounjoo end-->
