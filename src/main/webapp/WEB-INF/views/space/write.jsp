@@ -99,31 +99,17 @@
                <option value="연습실">연습실</option>
             </select>
          </tr>
-            <!--
-         <th width="50" height="50">공간타입</th>
-         <td><input type="text" name="space_kind" value="${view.kind}"/></td>
-         -->
-            <!--  
-         <tr>
-            <th width="50" height="50" class="form-control">작성자</th>
-            <td><input type="text" name="space_writer" value="${view.writer}"/></td>
-         </tr>
-         -->
          
          <label>가격</label>
          <div class="form-control">
          
-                 <div class="mt-1 col-sm-14">
-                     <div class="ml-5 custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline1" name="space_priceType" class="custom-control-input" value="6시간" checked>
-                    <label class="custom-control-label" for="customRadioInline1">6시간</label>
+                <div class="mt-1 col-sm-14">
+	               <label>6시간 : </label>
+	               <input type="text" name="space_6Hprice">원
+	               
+	               <label>종일 : </label>
+	               <input type="text" name="space_AllPrice">원
                </div>
-               <div class="ml-5 custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline2" name="space_priceType" class="custom-control-input" value="종일">
-                    <label class="custom-control-label" for="customRadioInline2">종일</label>
-               </div>
-               </div>
-               <input type="text" name="space_price">원
            </div>
          <br>
          <tr>
@@ -295,7 +281,8 @@
 	// 작성 후 등록 클릭시 유효성검사
 	function checkFormData() {
 		var space_title = $("input[name='space_title']").val();
-		var space_price = $("input[name='space_price']").val();
+		var space_6Hprice = $("input[name='space_6Hprice']").val();
+		var space_AllPrice = $("input[name='space_AllPrice']").val();
 		var space_address = $("input[name='space_address']").val();
 		var space_content = $("#space_content").val();
 		var space_account = $("input[name='space_account']").val();
@@ -305,9 +292,14 @@
 			return false;
 		}
 					
-		if(space_price == null || space_price == ''){
-			alert("공간의 가격을 입력해야 합니다.");
-			return false;
+		if(space_6Hprice == null || space_6Hprice == ''){
+			   alert("공간의 6시간 이용료를 입력해야 합니다.");
+			   return false;
+		}
+		
+		if(space_AllPrice == null || space_AllPrice == ''){
+			   alert("공간의 종일 이용료를 입력해야 합니다.");
+			   return false;
 		}
 					
 		if(space_address == null || space_address == ''){

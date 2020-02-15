@@ -164,7 +164,8 @@
                       </div>
                      <div class="unit-9-content">
                         <h2>${spaceVO.space_title}</h2>
-                        <span> ${spaceVO.space_priceType}&nbsp;${spaceVO.space_price} </span>
+                        <span> 6시간 : &nbsp;${spaceVO.space_6Hprice}원 </span>
+                        <span> 종 일 : &nbsp;${spaceVO.space_AllPrice}원 </span>
                      </div>
                   </a>
                </div>

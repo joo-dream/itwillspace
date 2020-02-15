@@ -60,7 +60,8 @@
 			</tr>
 			<tr>
 				<th>가 격</th>
-				<td>${view.space_priceType} &nbsp;${view.space_price}&nbsp;원</td>
+				<td>6시간 : &nbsp;${view.space_6Hprice}&nbsp;원</td>
+            	<td>종 일 : &nbsp;${view.space_AllPrice}&nbsp;원</td>
 			</tr>
 			<tr>
 				<th>주 소</th>
