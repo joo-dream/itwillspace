@@ -21,14 +21,9 @@
 <%@include file="../includes/header.jsp"%>
 <%@include file="../nav.jsp" %>
 </head>
-<body style="margin: 0 auto; width: 80%;">
+<body style="margin: 170px; padding:45px;">
 
-	<br><br><br>
-
-	<div class="container">
-	
-		<h2>공간 내용</h2>
-		<hr>
+	<div class="container" style="position:relative;">
 <!--		
 		<img src="/resources/image/test2.jpg" id = "spaceImg" class="m-3" style="width:200px;height:250px ">
 		<br>
@@ -37,7 +32,7 @@
 <!-- 방 사진 보여주기 yeounjoo start-->
 		<div class="card shadow mb-4 border border-secondary">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">공간 상세 이미지</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${view.space_title} 상세 이미지</h6>
 			</div>
 	        <div class="card-body">
 			    <div class='uploadResult'> 
@@ -49,37 +44,88 @@
 	   </div>
 <!-- 방 사진 보여주기 yeounjoo end-->
 	         	
-		<table style="line-height: 25px;">
-			<tr>
-				<th width="50">제 목</th>
-				<td>${view.space_title}</td>
-			</tr>
-			<tr>
-				<th>타 입</th>
-				<td>${view.space_kind}</td>
-			</tr>
-			<tr>
-				<th>가 격</th>
-				<td>6시간 : &nbsp;${view.space_6Hprice}&nbsp;원</td>
-            	<td>종 일 : &nbsp;${view.space_AllPrice}&nbsp;원</td>
-			</tr>
-			<tr>
-				<th>주 소</th>
-				<td>${view.space_address}</td>
-			</tr>
-
-			<tr>
-				<th>내 용</th>
-				<td>${view.space_content}</td>
-			</tr>
-
-			<tr>
-				<th>계 좌</th>
-				<td>${view.space_account}</td>
-			</tr>
-
-		</table>
-		<br>
+       <div class="card shadow mb-4 border vborder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">${view.space_title}</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block;">
+       			<div class="col col-sm-3">
+       				<span class="badge badge-dark">가격(6시간) : </span>
+       				${view.space_6Hprice}&nbsp;원
+       			</div>
+       			<div class="col col-sm-3">
+       				<span class="badge badge-dark">가격 (종 일) : </span>
+       				${view.space_AllPrice}&nbsp;원
+       			</div>
+       			<div class="col col-sm-9">
+       				<span class="badge badge-dark">&nbsp;결 제 계 좌 : </span>
+       				${view.space_account}
+       			</div>
+       			<div class="col col-sm-9">
+       				<span class="badge badge-dark">&nbsp;찾아오시는 길 : </span>
+       				${view.space_address}
+       			</div>
+       			<br>
+       			<div id="map" style="width: 550px; height: 400px; margin: 15px"></div>
+       		</div>
+       </div>
+       
+       <div class="card shadow mb-4 border vbroder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">${view.space_title} 소개</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block">
+       			${view.space_content}
+       		</div>
+       </div>
+       
+       <div class="card shadow mb-4 border vbroder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">환불규정 안내</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block">
+       			<p style="color:Tomato;"><b>* 이용당일(첫 날) 이후에 환불 관련 사항은 호스트에게 직접 문의하셔야 합니다.</b></p>
+       			<p>* 결제 후 2시간 이내에는 100% 환불이 가능합니다.(단, 이용시간 전까지만 가능)</p>
+       			<table class="table table-hover">
+       				<tr>
+       					<th>이용 8일 전</th>
+       					<th>총 금액의 100% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 7일 전</th>
+       					<th>총 금액의 90% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 6일 전</th>
+       					<th>총 금액의 80% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 5일 전</th>
+       					<th>총 금액의 70% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 4일 전</th>
+       					<th>총 금액의 60% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 3일 전</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 2일 전</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 전날</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 당일</th>
+       					<th>환불 불가</th>
+       				</tr>
+       			</table>
+       		</div>
+       </div>
 
 		<sec:authorize access="isAuthenticated()">      
    		<sec:authentication property="principal.username" var="pUserId"/>
@@ -93,11 +139,11 @@
 	</sec:authorize>
 	<br>
 	<a href="/reservation/booking?space_id=${view.space_id}" class="btn btn-primary">예약하기</a>
+	<a href="/space/listPage?page=1" class="btn btn-dark">목록으로</a>
 	
 	</div>
 
-	<div id="map" style="width: 500px; height: 400px; margin: 50px"></div>
-	
+	<br>
 	<!-- review 등록 yeounjoo start-->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
