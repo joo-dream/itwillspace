@@ -114,8 +114,8 @@
 			
 		<div class="form-group" align="right">
 		   <div class="col-sm-8 ">				
-	          <button type="submit" data-oper='modify' class="btn btn-primary btn-user btn-lg">정보 수정하기</button>
-	          <button type="submit" data-oper='remove' class="btn btn-danger btn-user btn-lg">탈퇴하기</button>
+	          <button id="memberModify" type="submit" data-oper='modify' class="btn btn-primary btn-user btn-lg">정보 수정하기</button>
+	          <button id="memberDelete" type="submit" data-oper='remove' class="btn btn-danger btn-user btn-lg">탈퇴하기</button>
 	       </div>
 	     </div>         
 	</form>		
@@ -175,7 +175,8 @@ $(document).ready(function(e){
 
 	//submit(가입신청)	
 	var formObj = $("form[role='form']");
-	$("button[type='submit']").on("click", function(e){
+	//$("button[type='submit']").on("click", function(e){
+	$("#memberModify, #memberDelete").on("click", function(e){
 	   
 		e.preventDefault();	
 		var operation = $(this).data("oper");

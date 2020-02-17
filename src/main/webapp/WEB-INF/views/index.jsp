@@ -158,13 +158,14 @@
             <c:forEach items="${spaceVO}" var="spaceVO" begin="0" end="8">
                <div class="col-lg-4" data-aos="fade-up"
                   data-aos-delay="100" >
-                  <a href="/space/detail?space_id=1" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
+                  <a href="/space/view?id=${spaceVO.space_id}" class="unit-9" style="border-radius:5px; margin-bottom:10%;">
                      <div class="image"
                       style="background-image: url('<spring:url value='/img/${spaceVO.space_image}' />');border-radius:5px; ">
                       </div>
                      <div class="unit-9-content">
                         <h2>${spaceVO.space_title}</h2>
-                        <span> ${spaceVO.space_price} </span>
+                        <span> 6시간 : &nbsp;${spaceVO.space_6Hprice}원 </span>
+                        <span> 종 일 : &nbsp;${spaceVO.space_AllPrice}원 </span>
                      </div>
                   </a>
                </div>

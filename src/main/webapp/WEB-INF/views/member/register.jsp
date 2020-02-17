@@ -6,6 +6,7 @@
 <html lang="en">
 
 <head>
+	<%@include file="../nav.jsp"%> 
 	<%@include file="../includes/header.jsp"%>  
 </head>  
 

@@ -1,22 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>공간 조회</title>
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/aos.css">
+   <link rel="stylesheet" type="text/css"
+      href="${pageContext.request.contextPath}/resources/css/style.css">
+
 <%@include file="../includes/header.jsp"%>
+<%@include file="../nav.jsp" %>
 </head>
-<body style="margin: 0 auto; width: 80%;">
+<body style="margin: 170px; padding:45px;">
 
-	<br><br><br>
-
-	<div class="container">
-	
-		<h2>공간 내용</h2>
-		<hr>
+	<div class="container" style="position:relative;">
 <!--		
 		<img src="/resources/image/test2.jpg" id = "spaceImg" class="m-3" style="width:200px;height:250px ">
 		<br>
@@ -25,7 +33,7 @@
 <!-- 방 사진 보여주기 yeounjoo start-->
 		<div class="card shadow mb-4 border border-secondary">
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">공간 상세 이미지</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${view.space_title} 상세 이미지</h6>
 			</div>
 	        <div class="card-body">
 			    <div class='uploadResult'> 
@@ -37,52 +45,108 @@
 	   </div>
 <!-- 방 사진 보여주기 yeounjoo end-->
 	         	
-		<table style="line-height: 25px;">
-			<tr>
-				<th width="50">제 목</th>
-				<td>${view.space_title}</td>
-			</tr>
-			<tr>
-				<th>타 입</th>
-				<td>${view.space_kind}</td>
-			</tr>
-			<tr>
-				<th>가 격</th>
-				<td>${view.space_price}</td>
-			</tr>
-			<tr>
-				<th>주 소</th>
-				<td>${view.space_address}</td>
-			</tr>
-
-			<tr>
-				<th>내 용</th>
-				<td>${view.space_content}</td>
-			</tr>
-
-			<tr>
-				<th>계 좌</th>
-				<td>${view.space_account}</td>
-			</tr>
-
-		</table>
-		<br>
+       <div class="card shadow mb-4 border vborder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">${view.space_title}</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block;">
+       			<div class="col col-sm-3">
+       				<span class="badge badge-dark">가격(6시간) : </span>
+       				<fmt:formatNumber type="number" maxFractionDigits="3" value="${view.space_6Hprice}"/>&nbsp;원
+       			</div>
+       			<div class="col col-sm-3">
+       				<span class="badge badge-dark">가격 (종 일) : </span>
+       				<fmt:formatNumber type="number" maxFractionDigits="3" value="${view.space_AllPrice}"/>&nbsp;원
+       			</div>
+       			<div class="col col-sm-9">
+       				<span class="badge badge-dark">&nbsp;결 제 계 좌 : </span>
+       				${view.space_account}
+       			</div>
+       			<div class="col col-sm-9">
+       				<span class="badge badge-dark">&nbsp;찾아오시는 길 : </span>
+       				${view.space_address}
+       			</div>
+       			<br>
+       			<div class="col col-sm-6">
+	       			<div id="map" style="width: 100%; height: 400px"></div>
+       			</div>
+       		</div>
+       </div>
+       
+       <div class="card shadow mb-4 border vbroder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">${view.space_title} 소개</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block; white-space:pre-line;">
+       			<c:out value="${view.space_content}"/>
+       		</div>
+       </div>
+       
+       <div class="card shadow mb-4 border vbroder-secondary">
+       		<div class="card-header py-3">
+       			<h6 class="m-0 font-weight-bold text-primary">환불규정 안내</h6>
+       		</div>
+       		<div class="card-body" style="display:inline-block">
+       			<p style="color:Tomato;"><b>* 이용당일(첫 날) 이후에 환불 관련 사항은 호스트에게 직접 문의하셔야 합니다.</b></p>
+       			<p>* 결제 후 2시간 이내에는 100% 환불이 가능합니다.(단, 이용시간 전까지만 가능)</p>
+       			<table class="table table-hover">
+       				<tr>
+       					<th>이용 8일 전</th>
+       					<th>총 금액의 100% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 7일 전</th>
+       					<th>총 금액의 90% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 6일 전</th>
+       					<th>총 금액의 80% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 5일 전</th>
+       					<th>총 금액의 70% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 4일 전</th>
+       					<th>총 금액의 60% 환불</th>
+       				</tr>
+       				<tr>
+       					<th>이용 3일 전</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 2일 전</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 전날</th>
+       					<th>환불 불가</th>
+       				</tr>
+       				<tr>
+       					<th>이용 당일</th>
+       					<th>환불 불가</th>
+       				</tr>
+       			</table>
+       		</div>
+       </div>
 
 		<sec:authorize access="isAuthenticated()">      
    		<sec:authentication property="principal.username" var="pUserId"/>
    		<c:set var="spaceUserId" value="${view.userId}"/>
    		<c:if test="${pUserId eq spaceUserId }">
    		<div>
-			<a href="/space/modify?id=${view.space_id }">게시물 수정</a> 
-			<a href="/space/delete?id=${view.space_id }">게시물 삭제</a>
+			<a href="/space/modify?id=${view.space_id }" class="btn btn-warning btn-sm">게시물 수정</a> 
+			<a href="/space/delete?id=${view.space_id }" class="btn btn-danger btn-sm">게시물 삭제</a>
 		</div>
 	</c:if>
 	</sec:authorize>
-
+	<br>
+	<a href="/reservation/booking?space_id=${view.space_id}" class="btn btn-primary">예약하기</a>
+	<a href="/space/listPage?page=1" class="btn btn-dark">목록으로</a>
+	
 	</div>
 
-	<div id="map" style="width: 500px; height: 400px; margin: 50px"></div>
-	
+	<br>
 	<!-- review 등록 yeounjoo start-->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">

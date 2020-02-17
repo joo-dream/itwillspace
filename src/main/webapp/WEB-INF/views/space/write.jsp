@@ -10,7 +10,31 @@
 <head>
 <meta charset="UTF-8">
 <title>공간 정보 작성</title>
+
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/icomoon/style.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/jquery-ui.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/aos.css">
+<link rel="stylesheet" type="text/css"
+   href="${pageContext.request.contextPath}/resources/css/style.css">
+   
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400" rel="stylesheet">   
+
+<link rel="stylesheet"
+   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
 <%@include file="../includes/header.jsp"%>
+<%@include file="../nav.jsp" %>
 
 </head>
 <body>
@@ -61,105 +85,97 @@
 		}
 	</script>
 
-	<div class="container">
-		<!-- framework -->
-		<div class="row justify-content-center">
-		<div class="col-xl-6 col-lg-12 col-md-9">
-		<div class="card o-hidden border-0 shadow-lg my-g">
-		<div class="card-body p-0">
-		
-		<div class="row">
-		<div class="col-lg-12">
-		<div class="p-5">
-		<div class="text-center">
-			<h2 class="h4 text-gray-900 mb-4">공간정보 작성</h2>
-		</div>
+<body style="margin:170px; padding:45px;">
+<div class="container" style="position: relative;">
 
-		<form role="form" method="post">
-			<sec:authentication property="principal.username" var="pUserId" />
-			<input type="hidden" name='userId' value="${pUserId}">
-			<table>
-				<tr>
-					<th width="50" height="50" class="form-control">공간명</th>
-					<td><input type="text" name="space_title"
-						value="${view.title}" /></td>
-				</tr>
-				<tr>
-					<label>타입</label>
-					<select name="space_kind" class="form-control">
-						<option value="파티" selected>파티</option>
-						<option value="회의">회의</option>
-						<option value="연습">연습</option>
-					</select>
-				</tr>
-				<!--
-			<th width="50" height="50">공간타입</th>
-			<td><input type="text" name="space_kind" value="${view.kind}"/></td>
-			-->
-				<!--  
-			<tr>
-				<th width="50" height="50" class="form-control">작성자</th>
-				<td><input type="text" name="space_writer" value="${view.writer}"/></td>
-			</tr>
-			-->
-				<tr>
-					<label>가격</label>
-					<select name="space_price" class="form-control">
-						<option value="6시간:50000" selected>6시간:50000</option>
-						<option value="종일:150000">종일:150000</option>
-					</select>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">방주소</th>
-					<td><input type="text" name="space_address"
-						value="${view.address}" /> <input type="button"
-						onclick="daumZipCode()" value="주소 검색"></td>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">공간상세내용</th>
-					<td><textarea cols="80" rows="10" name="space_content">${view.content}</textarea></td>
-				</tr>
-				<tr>
-					<th width="50" height="50" class="form-control">공간결제계좌</th>
-					<td><input type="text" name="space_account"
-						value="${view.account }" /></td>
-				</tr>
-				<div class="card shadow mb-4 border border-primary">
-					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6>
-					</div>
-			        <div class="card-body">
-			            <input multiple="multiple" type="file" name='uploadFile'
-												accept="image/*">
-					    <div class='uploadResult'> 
-				          <ul class="d-flex flex-wrap">
-				          
-				          </ul>
-			        	</div>							
-			        </div>					
-				</div>
+   <!-- framework -->   
+   <div class="form-group" style="float:left; width:100%; display:inline-block;">
+   	  <div class="container p-3 my-3 bg-dark text-white">
+	      <h2>공간정보 작성</h2>   	  
+   	  </div>
+      <form role="form" method="post">
+      	<sec:authentication property="principal.username" var="pUserId" />
+      	<input type="hidden" name='userId' value="${pUserId}">
+      	<div class="controls">
+            <h6><span class="badge badge-dark">공간명</span></h6>
+            <input type="text" class="form-control" name="space_title" placeholder="공간명을 입력해주세요.">
+        </div>
+        <br>
+      	<div class="controls">
+            <h6><span class="badge badge-dark">공간유형</span></h6>
+            <select class="form-control" name="space_kind" id="space_kind">
+                  <option value="" selected>공간유형을 선택해주세요.</option>
+                  <option value="파티룸">파티룸</option>
+                  <option value="회의실">회의실</option>
+                  <option value="연습실">연습실</option>
+            </select>
+        </div>
+        <br>
+      	<div class="controls">
+            <h6><span class="badge badge-dark">가격(6시간)</span></h6>
+            <input type="text" class="form-control" name="space_6Hprice" placeholder="6시간 이용금액">
+        </div>
+        <br>
+      	<div class="controls">
+            <h6><span class="badge badge-dark">가격(종일)</span></h6>
+            <input type="text" class="form-control" name="space_AllPrice" placeholder="종일 이용금액">
+        </div>
+        <br>
+      	<div class="controls">
+            <h6><span class="badge badge-dark">공간주소</span></h6>
+            <div class="form-row">
+            	<div class="col col-sm-10">
+	            	<input type="text" class="form-control" name="space_address" value="${view.address}" placeholder="주소검색 버튼을 이용해주세요">
+            	</div>
+            	<div class="col col-sm-2">
+	            	<input type="button" class="btn btn-primary" onclick="daumZipCode()" value="주소 검색">
+            	</div>
+            
+            </div>
+        </div>
+        <br>
+      	<div class="controls">
+            <h6><span class="badge badge-dark">공간의 상세내용</span></h6>
+            <textarea title="공간의 상세내용" rows="10" id="space_content" class="form-control" name="space_content">${view.content}</textarea>
+        </div>
+        <br>
+        <div class="controls">
+            <h6><span class="badge badge-dark">결제계좌번호</span></h6>
+            <input type="text" class="form-control" name="space_account" placeholder="결제 계좌번호를 입력해주세요.">
+        </div>
+        <br>
+        <div class="card shadow mb-4 border border-primary">
+            <div class="card-header py-3">
+               <!-- <h6 class="m-0 font-weight-bold text-primary">공간 이미지 설정</h6> -->
+               <h6><span class="badge badge-dark">공간 이미지 등록</span></h6>
+            </div>
+              <div class="card-body">
+                  <input multiple="multiple" type="file" name='uploadFile' accept="image/*">
+                <div class='uploadResult'> 
+                   <ul class="d-flex flex-wrap">
+                   
+                   </ul>
+                 </div>                     
+              </div>
+        </div>
+        
+        <button id="spaceWrite" type="submit" class="btn btn-primary btn-lg">작성</button>
+      	<a href="/memberInfo/hostPage" class="btn btn-danger btn-lg">취소</a>
+        
+      </form>
+   </div>
 
-			</table>
-			<button type="submit">작성</button>
-		</form>
-		
-		</div>
-		</div>
-		</div>
-	
-	</div>
-	</div>
-	</div>
-	</div>
 </div>
 <script>
 	$(document).ready(function(e) {
 		var formObj = $("form[role='form']");
 		
 		//submit
-		$("button[type='submit']").on("click", function(e){
+		$("#spaceWrite").on("click", function(e){
 		   
-			e.preventDefault();				
+			e.preventDefault();
+			if(checkFormData()==false) //form input이 입력되었는지, 올바른지 확인
+	 	        return;  			
 			    	    
 			var str = "";	
 			$(".uploadResult ul li").each(function(i, obj){
@@ -280,7 +296,53 @@
 					}
 				}); //$.ajax
 		});
-	});
+	// 작성 후 등록 클릭시 유효성검사
+	function checkFormData() {
+		var space_title = $("input[name='space_title']").val();
+		var space_kind = $("#space_kind").val();
+		var space_6Hprice = $("input[name='space_6Hprice']").val();
+		var space_AllPrice = $("input[name='space_AllPrice']").val();
+		var space_address = $("input[name='space_address']").val();
+		var space_content = $("#space_content").val();
+		var space_account = $("input[name='space_account']").val();
+
+		if(space_title == null || space_title == ''){
+			alert("공간명을 입력해야 합니다.");
+			return false;
+		}
+
+		if(space_kind == null || space_kind == ''){
+			   alert("공간의 유형을 선택해주세요.");
+			   return false;
+		}
+					
+		if(space_6Hprice == null || space_6Hprice == ''){
+			   alert("공간의 6시간 이용료를 입력해야 합니다.");
+			   return false;
+		}
+		
+		if(space_AllPrice == null || space_AllPrice == ''){
+			   alert("공간의 종일 이용료를 입력해야 합니다.");
+			   return false;
+		}
+					
+		if(space_address == null || space_address == ''){
+			alert("공간의 주소를 입력해야 합니다. 주소검색 버튼을 이용하여 입력해주세요!");
+			return false;
+		}
+					
+		if(space_content == null || space_content == ''){
+			alert("공간의 상세내용을 입력해야 합니다.");
+			return false;
+		}
+					
+		if(space_account == null || space_account == ''){
+			alert("결제 계좌번호를 입력해주세요.");
+			return false;
+		}
+
+	};
+});
 </script>
 
 </body>
