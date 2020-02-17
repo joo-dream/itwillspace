@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,11 +52,11 @@
        		<div class="card-body" style="display:inline-block;">
        			<div class="col col-sm-3">
        				<span class="badge badge-dark">가격(6시간) : </span>
-       				${view.space_6Hprice}&nbsp;원
+       				<fmt:formatNumber type="number" maxFractionDigits="3" value="${view.space_6Hprice}"/>&nbsp;원
        			</div>
        			<div class="col col-sm-3">
        				<span class="badge badge-dark">가격 (종 일) : </span>
-       				${view.space_AllPrice}&nbsp;원
+       				<fmt:formatNumber type="number" maxFractionDigits="3" value="${view.space_AllPrice}"/>&nbsp;원
        			</div>
        			<div class="col col-sm-9">
        				<span class="badge badge-dark">&nbsp;결 제 계 좌 : </span>
