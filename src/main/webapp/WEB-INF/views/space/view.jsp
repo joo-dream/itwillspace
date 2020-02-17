@@ -66,7 +66,9 @@
        				${view.space_address}
        			</div>
        			<br>
-       			<div id="map" style="width: 550px; height: 400px; margin: 15px"></div>
+       			<div class="col col-sm-6">
+	       			<div id="map" style="width: 100%; height: 400px"></div>
+       			</div>
        		</div>
        </div>
        
@@ -74,8 +76,8 @@
        		<div class="card-header py-3">
        			<h6 class="m-0 font-weight-bold text-primary">${view.space_title} 소개</h6>
        		</div>
-       		<div class="card-body" style="display:inline-block">
-       			${view.space_content}
+       		<div class="card-body" style="display:inline-block; white-space:pre-line;">
+       			<c:out value="${view.space_content}"/>
        		</div>
        </div>
        
