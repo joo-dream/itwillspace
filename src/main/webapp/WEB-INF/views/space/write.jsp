@@ -103,7 +103,7 @@
         <br>
       	<div class="controls">
             <h6><span class="badge badge-dark">공간유형</span></h6>
-            <select class="form-control" name="space_kind">
+            <select class="form-control" name="space_kind" id="space_kind">
                   <option value="" selected>공간유형을 선택해주세요.</option>
                   <option value="파티룸">파티룸</option>
                   <option value="회의실">회의실</option>
@@ -299,6 +299,7 @@
 	// 작성 후 등록 클릭시 유효성검사
 	function checkFormData() {
 		var space_title = $("input[name='space_title']").val();
+		var space_kind = $("#space_kind").val();
 		var space_6Hprice = $("input[name='space_6Hprice']").val();
 		var space_AllPrice = $("input[name='space_AllPrice']").val();
 		var space_address = $("input[name='space_address']").val();
@@ -308,6 +309,11 @@
 		if(space_title == null || space_title == ''){
 			alert("공간명을 입력해야 합니다.");
 			return false;
+		}
+
+		if(space_kind == null || space_kind == ''){
+			   alert("공간의 유형을 선택해주세요.");
+			   return false;
 		}
 					
 		if(space_6Hprice == null || space_6Hprice == ''){
