@@ -189,7 +189,7 @@
                   alert("이미 예약된 날입니다! 다른 날을 입력해주세요");
                   $('#date').focus();
                   $('#date').val('');
-               } else if((outyyyy < yyyy) || (outyyyy>= yyyy && outmm<mm) || (outyyyy>=yyyy && outmm>= mm && outdd<dd)){
+               } else if((outyyyy < yyyy) || (outyyyy>= yyyy && outmm<mm) || (outyyyy>=yyyy && outmm== mm && outdd<dd)){
                   alert("유효하지 않은 날짜를 입력하셨습니다! 다시 입력해주세요");
                   $('#date').focus();
                   $('#date').val('');
