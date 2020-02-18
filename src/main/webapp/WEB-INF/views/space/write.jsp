@@ -308,36 +308,43 @@
 
 		if(space_title == null || space_title == ''){
 			alert("공간명을 입력해야 합니다.");
+			$("input[name='space_title']").attr("tabindex", -1).focus();
 			return false;
 		}
 
 		if(space_kind == null || space_kind == ''){
-			   alert("공간의 유형을 선택해주세요.");
-			   return false;
+			alert("공간의 유형을 선택해주세요.");
+			$("#space_kind").attr("tabindex", -1).focus();
+			return false;
 		}
 					
 		if(space_6Hprice == null || space_6Hprice == ''){
-			   alert("공간의 6시간 이용료를 입력해야 합니다.");
-			   return false;
+			alert("공간의 6시간 이용료를 입력해야 합니다.");
+			$("input[name='space_6Hprice']").attr("tabindex", -1).focus();
+			return false;
 		}
 		
 		if(space_AllPrice == null || space_AllPrice == ''){
-			   alert("공간의 종일 이용료를 입력해야 합니다.");
-			   return false;
+			alert("공간의 종일 이용료를 입력해야 합니다.");
+			$("input[name='space_AllPrice']").attr("tabindex", -1).focus();
+			return false;
 		}
 					
 		if(space_address == null || space_address == ''){
 			alert("공간의 주소를 입력해야 합니다. 주소검색 버튼을 이용하여 입력해주세요!");
+			$("input[name='space_address']").attr("tabindex", -1).focus();
 			return false;
 		}
 					
 		if(space_content == null || space_content == ''){
 			alert("공간의 상세내용을 입력해야 합니다.");
+			$("#space_content").attr("tabindex", -1).focus();
 			return false;
 		}
 					
 		if(space_account == null || space_account == ''){
 			alert("결제 계좌번호를 입력해주세요.");
+			$("input[name='space_account']").attr("tabindex", -1).focus();
 			return false;
 		}
 
