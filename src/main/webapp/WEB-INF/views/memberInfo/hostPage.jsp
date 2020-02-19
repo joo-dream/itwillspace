@@ -106,7 +106,7 @@
          </div>
          <div class="modal-body" style="text-align: center;"></div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">close</button>
          </div>
       </div>
    </div>

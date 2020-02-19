@@ -180,7 +180,7 @@
 				    <button id='modalModBtn' type="button" class="btn btn-primary bt-sm">수정</button>
 	        		<button id='modalRemoveBtn' type="button" class="btn btn-danger bt-sm">삭제</button>
 	        		<button id='modalRegisterBtn' type="button" class="btn btn-primary bt-sm">등록</button>
-	        		<button id='modalCloseBtn' type="button" class="btn btn-secondary bt-sm" data-dismiss="modal">Close</button>				
+	        		<button id='modalCloseBtn' type="button" class="btn btn-dark bt-sm" data-dismiss="modal">Close</button>				
 				</div>
 			</div>
 		</div>
@@ -310,7 +310,7 @@ $(document).ready(function () {
 		        str +="<p style='color:black;'>"+list[i].content+"</p></div>";
 		        if(userValue == list[i].userId){
 					str += "<button type='button' data-rid='"+list[i].reviewId+"' "
-					str += "class='mt-n2 pt-0 pb-0 btn btn-secondary btn-sm float-right'><small>편집</small></button>";		
+					str += "class='mt-n2 pt-0 pb-0 btn btn-dark btn-sm float-right'><small>편집</small></button>";		
 		        }  
 		        str +="</div>";            
 		    }	     
